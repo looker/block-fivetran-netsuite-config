@@ -16,3 +16,15 @@ explore: transaction_details_config {
   extends: [transaction_details_core]
   extension: required
 }
+
+# explore: balance_sheet {
+#   extends: [balance_sheet_core]
+# }
+
+# explore: income_statement {
+#   extends: [income_statement_core]
+# }
+
+# explore: transaction_details {
+#   extends: [transaction_details_core]
+# }

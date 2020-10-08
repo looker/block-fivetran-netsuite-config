@@ -1,3 +1,5 @@
+connection: "@{CONNECTION_NAME}" #this needs to be personalized
+
 include: "*.view.lkml"
 
 explore: balance_sheet_config {

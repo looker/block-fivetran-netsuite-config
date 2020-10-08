@@ -1,20 +1,20 @@
 connection: "@{CONNECTION_NAME}" #this needs to be personalized
 
+include: "//block-fivetran-netsuite-spreedly/*.view"
+include: "//block-fivetran-netsuite-spreedly/*.explore"
+include: "//block-fivetran-netsuite-spreedly/*.dashboard"
 include: "*.view.lkml"
 
-explore: balance_sheet_config {
+explore: balance_sheet {
   extends: [balance_sheet_core]
-  extension: required
 }
 
-explore: income_statement_config {
+explore: income_statement {
   extends: [income_statement_core]
-  extension: required
 }
 
-explore: transaction_details_config {
+explore: transaction_details {
   extends: [transaction_details_core]
-  extension: required
 }
 
 # explore: balance_sheet {

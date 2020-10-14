@@ -1,6 +1,8 @@
 connection: "@{CONNECTION_NAME}" #this needs to be personalized
 
 include: "//block-fivetran-netsuite-spreedly/*.view"
+include: "//block-fivetran-netsuite-spreedly/views/*.view"
+
 include: "//block-fivetran-netsuite-spreedly/*.explore"
 include: "//block-fivetran-netsuite-spreedly/*.dashboard"
 include: "*.view.lkml"

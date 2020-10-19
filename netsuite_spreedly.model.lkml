@@ -11,7 +11,7 @@ include: "//block-fivetran-netsuite-spreedly/income_statement.dashboard"
 include: "//block-fivetran-netsuite-spreedly/sales.dashboard"
 # include: "//block-fivetran-netsuite-spreedly/expenses_.dashboard"
 
-include: "*.view.lkml"
+include: "/views/*.view.lkml"
 
 explore: balance_sheet {
   extends: [balance_sheet_core]
@@ -27,6 +27,11 @@ explore: income_statement {
 
 explore: +transaction_lines {
   description: "this is the right transaction lines"
+  join: customer_types {
+    type: left_outer
+    sql_on: ${customers.customer_type_id} = ${customer_types.customer_type_id} ;;
+    relationship: many_to_one
+  }
 }
 
 # explore: balance_sheet {

@@ -23,3 +23,10 @@ local_dependency: {
     value: "@{CONNECTION_NAME}"
   }
 }
+
+
+local_dependency: {
+  project: "spreedly"
+}
+
+# remote_dependency:  {}

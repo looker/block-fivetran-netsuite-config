@@ -13,7 +13,10 @@ include: "//block-fivetran-netsuite-spreedly/sales.dashboard"
 
 include: "/views/*.view.lkml"
 
-include: "//spreedly/heroku_kafka/views/transactions.view"
+include: "//spreedly/heroku_kafka/views/*.view"
+# include: "//spreedly/heroku_kafka/customer_health_score.layer.lkml"
+# include: "//spreedly/heroku_kafka/views/organizations.view"
+# include: "//spreedly/heroku_kafka/views/accounts.view"
 
 explore: balance_sheet {
   extends: [balance_sheet_core]
@@ -45,16 +48,62 @@ explore: +transaction_lines {
     sql_on: ${customers.customer_type_id} = ${customer_types.customer_type_id} ;;
     relationship: many_to_one
   }
-  # join: transactions_lava {
-  #   from: transactions
-  #   sql_on: ${transaction_lines.transaction_id} = ${transactions_lava.id? ;;
-  #   relationship: many_to_one
-  # }
+
   join: classes { #TODO AJC Needs validation... not sure how to do that
     type: left_outer
     sql_on: ${transaction_lines.class_id} = ${classes.class_id} ;;
     relationship: many_to_one
   }
+}
+
+explore: netsuite_with_indirect_revenue {
+  extends: [transaction_lines]
+  join: organizations {
+    sql_on: ${customers.customer_extid} = ${organizations.key} ;;
+    relationship: many_to_one
+  }
+  join: accounts_lava {
+    from: accounts
+    type: left_outer
+    sql_on: ${accounts_lava.organization_key}=${organizations.key} ;;
+    relationship: many_to_one
+  }
+  join: transactions_lava {
+    from: transactions
+    sql_on: ${accounts_lava.key} = ${transactions_lava.account_key} ;;
+relationship: one_to_many
+  }
+  join: gateways {
+    type: left_outer
+    sql_on: ${gateways.key}=${transactions_lava.gateway_key} ;;
+    relationship: many_to_one # verify uniqueness of keys to update the relationship
+  }
+
+  join: bin_data {
+    type: left_outer
+    sql_on: ${bin_data.bin}=${transactions_lava.payment_method_first_six_digits};;
+    relationship: many_to_many
+  }
+
+  join: receivers {
+    type: left_outer
+    sql_on: ${receivers.key}=${transactions_lava.payment_method_receiver_key} ;;
+    relationship: many_to_one # verify uniqueness of keys to update the relationship
+
+  }
+
+  join: payment_methods {
+    type: left_outer
+    sql_on: ${transactions_lava.payment_method_key}=${payment_methods.key} ;;
+    relationship: many_to_one
+  }
+
+  # join: customer_health_score_ndt {
+  #   type: left_outer
+  #   sql_on: ${organizations.name}=${customer_health_score_ndt.name} and
+  #     ${organizations.key}=${customer_health_score_ndt.key};;
+  #   relationship: one_to_one
+  # }
 }
 
 # explore: balance_sheet {

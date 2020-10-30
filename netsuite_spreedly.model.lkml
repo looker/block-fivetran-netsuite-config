@@ -31,12 +31,8 @@ explore: income_transaction_details {
   extends: [transaction_lines]
   sql_always_where: ${transactions_with_converted_amounts.is_income_statement}
 
-  AND(${accounting_periods.fiscal_calendar_id} is null
-        or ${accounting_periods.fiscal_calendar_id}  = (select
-                                                      fiscal_calendar_id
-                                                    from @{SCHEMA_NAME}.subsidiaries
-                                                    where parent_id is null)
-  )
+  AND ${EXTENDED}
+
   ;; #maybe need more stuff, like this query https://spreedly.cloud.looker.com/explore/netsuite_spreedly/transaction_lines?qid=vZGw7W8JFZ4SjVrGhQS2AI&toggle=fil
 }
 

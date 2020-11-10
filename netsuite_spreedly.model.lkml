@@ -1,5 +1,5 @@
 connection: "snowflake" #this needs to be personalized
-
+label: "Netsuite"
 # include: "//block-fivetran-netsuite-spreedly/*.view"
 
 # include: "//block-fivetran-netsuite-spreedly/accounts_payable.dashboard"

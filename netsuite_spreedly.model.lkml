@@ -64,6 +64,7 @@ explore: transaction_lines {
  ;;
     relationship: many_to_many #TODO AJC Needs confirmation
   }
+
   join: accounts {
     from: accounts_netsuite
     type: left_outer
@@ -152,7 +153,26 @@ explore: +transaction_lines {
     sql_on: ${transaction_lines.class_id} = ${classes.class_id} ;;
     relationship: many_to_one
   }
+
+  # join: monthly_org_gateway_percentage {
+  #   sql_on: ${monthly_org_gateway_percentage.organization_key}=${customers.lava_organization}
+  #     and monthly;;
+  # }
+
+# join: monthly_org_partner_gateway_transactions {
+#   type: left_outer
+#   sql_on: ${transactions.transaction_month} = ${monthly_org_partner_gateway_transactions.created_month}
+#   And ${monthly_org_partner_gateway_transactions.gateway_key} =${transaction_lines.unique_key}
+#   AND ${customers.lava_organization} =${monthly_org_partner_gateway_transactions.organization_key};;
+
+# }
 }
+# view:+monthly_org_partner_gateway_transactions {
+#   measure:indirect_revenue{
+#   type:
+#   }
+
+# }
 
 # explore: netsuite_with_indirect_revenue {
 #   extends: [transaction_lines]

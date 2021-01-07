@@ -1,4 +1,4 @@
-connection: "snowflake" #this needs to be personalized
+# connection: "snowflake" #this needs to be personalized
 label: "Netsuite"
 # include: "//block-fivetran-netsuite-spreedly/*.view"
 
@@ -15,10 +15,17 @@ include: "/views/*.view.lkml"
 
 include: "//spreedly/heroku_kafka/views/*.view"
 include: "customer_daily_income_transaction_details_summary.view"
+include: "//spreedly/heroku_kafka/heroku_kafka.model"
+# shortcut pulling in all model
 
 # include: "//spreedly/heroku_kafka/customer_health_score.layer.lkml"
 # include: "//spreedly/heroku_kafka/views/organizations.view"
 # include: "//spreedly/heroku_kafka/views/accounts.view"
+
+# datagroup: whitelist_etl {
+#   max_cache_age: "24 hours"
+#   sql_trigger: select count(*) from "SNOWPIPE"."TRANSACTIONS" ;;
+# }
 
 explore: balance_sheet {
   extends: [balance_sheet_core]
@@ -153,6 +160,28 @@ explore: +transaction_lines {
     sql_on: ${transaction_lines.class_id} = ${classes.class_id} ;;
     relationship: many_to_one
   }
+
+#TODO MFJ Needs validation... changed join from Key to gateway_type... Don't think we need or want Gateway key here....it's not the Key for each gateway...
+# changed it from unique key to Gateway Type
+join: monthly_partner_gateway_transactions {
+  type: left_outer
+  sql_on: ${transactions.transaction_month} = ${monthly_partner_gateway_transactions.created_month}
+  And ${customers.gateway_type_raw} = ${monthly_partner_gateway_transactions.gateway_type};;
+  relationship: many_to_one
+}
+
+#TODO MFJ Needs validation... changed join from Key to gateway_type... Don't think we need or want Gateway key here....it's not the Key for each gateway...
+# changed it from lava organization to Spreedly billing ID
+# changed transaction_lines.unique_key to customers.gateway_type
+
+  join: monthly_org_partner_gateway_transactions {
+    type: left_outer
+    sql_on: ${monthly_partner_gateway_transactions.created_month} = ${monthly_org_partner_gateway_transactions.created_month}
+         And ${monthly_partner_gateway_transactions.gateway_type}} = ${monthly_org_partner_gateway_transactions.gateway_type};;
+        # AND ${customers.spreedly_billing_id} =${monthly_org_partner_gateway_transactions.organization_key};;
+    relationship: many_to_many
+  }
+
 
   # join: monthly_org_gateway_percentage {
   #   sql_on: ${monthly_org_gateway_percentage.organization_key}=${customers.lava_organization}

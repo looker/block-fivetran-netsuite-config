@@ -14,6 +14,7 @@ view: transaction_lines {
     sql: ${TABLE}."TRANSACTION_LINE_ID" ;;
   }
 
+
   dimension: _fivetran_deleted {
     type: yesno
     sql: ${TABLE}."_FIVETRAN_DELETED" ;;

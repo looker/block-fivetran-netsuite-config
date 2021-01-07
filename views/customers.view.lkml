@@ -599,6 +599,18 @@ view: customers {
     sql: ${TABLE}."HUBSPOT_LINK" ;;
   }
 
+# MFJ added Dimension GatewayType 1/5/2020
+  dimension: gateway_type_raw {
+    type: string
+    hidden: yes
+    sql: ${TABLE}."GATEWAY_TYPE";;
+  }
+
+  dimension: gateway_type {
+    type: string
+    sql: initcap(replace(${gateway_type_raw},'_',' ')) ;;
+  }
+
   dimension: ico {
     type: string
     sql: ${TABLE}."ICO" ;;

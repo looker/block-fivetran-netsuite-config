@@ -48,20 +48,30 @@
       type: count
     }
 
-    dimension: Indirect_Revenue{
+  # scope for the view to pull in the dimensions need three views to create this calculations...
+  # step 2 build subquery out of this and join to Netsuite explore...
+
+    dimension: indirect_revenue{
     description: "Calculate the Indirect revenue for all organizations taking % of total GW TSX * Total GW Revenue"
+    value_format: "$#,##0.00"
     type: number
     sql: 1.0*${sum_transaction_amount}*${monthly_partner_gateway_transactions.percent_of_monthly_gateway_transactions};;
     }
-  # /nullif(${count},0)
-  # scope for the view to pull in the dimensions need three views to create this calculations...
-  # step 2 build subquery out of this and join to Netsuite explore...
-  # ...
-    # dimension: percent_of_monthly_gateway_transactions{
-    #   description: "% of Org TSX compared to Total GW TSX"
-    #   type: number
-    #   sql: 1.0*${monthly_org_partner_gateway_transactions.count}/nullif(${count},0) ;;
-    # }
+
+    measure:total_indirect_revenue{
+      type: sum
+      drill_fields: [gateway_type,ending_month,sum_transaction_amount,monthly_partner_gateway_transactions.percent_of_monthly_gateway_transactions]
+      sql: ${indirect_revenue} ;;
+    }
+
+
+
+
+
+
+
+
+
 
 
   }

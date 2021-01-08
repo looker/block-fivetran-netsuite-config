@@ -44,7 +44,8 @@
       value_format: "$#,##0.00"
       type: number
     }
-    measure: count {
+
+   measure: count {
       type: count
     }
 

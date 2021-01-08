@@ -161,31 +161,30 @@ explore: +transaction_lines {
     relationship: many_to_one
   }
 
-#TODO MFJ Needs validation... changed join from Key to gateway_type... Don't think we need or want Gateway key here....it's not the Key for each gateway...
-# changed it from unique key to Gateway Type
-join: monthly_partner_gateway_transactions {
-  type: left_outer
-  sql_on: ${transactions.transaction_month} = ${monthly_partner_gateway_transactions.created_month}
-  And ${customers.gateway_type_raw} = ${monthly_partner_gateway_transactions.gateway_type};;
-  relationship: many_to_one
-}
 
-#TODO MFJ Needs validation... changed join from Key to gateway_type... Don't think we need or want Gateway key here....it's not the Key for each gateway...
-# changed it from lava organization to Spreedly billing ID
-# changed transaction_lines.unique_key to customers.gateway_type
+# join: monthly_partner_gateway_transactions {
+#   type: left_outer
+#   sql_on: ${transactions.transaction_month} = ${monthly_partner_gateway_transactions.created_month}
+#   And ${customers.gateway_type_raw} = ${monthly_partner_gateway_transactions.gateway_type};;
+#   relationship: many_to_one
+# }
 
-  join: monthly_org_partner_gateway_transactions {
-    type: left_outer
-    sql_on: ${monthly_partner_gateway_transactions.created_month} = ${monthly_org_partner_gateway_transactions.created_month}
-         And ${monthly_partner_gateway_transactions.gateway_type}} = ${monthly_org_partner_gateway_transactions.gateway_type};;
-        # AND ${customers.spreedly_billing_id} =${monthly_org_partner_gateway_transactions.organization_key};;
-    relationship: many_to_many
-  }
+
+#   join: monthly_org_partner_gateway_transactions {
+#     type: left_outer
+#     sql_on: ${monthly_partner_gateway_transactions.created_month} = ${monthly_org_partner_gateway_transactions.created_month}
+#         And ${monthly_partner_gateway_transactions.gateway_type}} = ${monthly_org_partner_gateway_transactions.gateway_type};;
+#         # AND ${customers.spreedly_billing_id} =${monthly_org_partner_gateway_transactions.organization_key};;
+#     relationship: many_to_many
+#   }
 
 
   # join: monthly_org_gateway_percentage {
-  #   sql_on: ${monthly_org_gateway_percentage.organization_key}=${customers.lava_organization}
-  #     and monthly;;
+  #   type:  left_outer
+  #   sql_on: ${monthly_org_gateway_percentage.gateway_type} = ${customers.gateway_type}
+  #   And ${monthly_org_gateway_percentage.created_month} = ${accounting_periods.ending_month}
+  #   ;;
+  #   relationship: many_to_many
   # }
 
 # join: monthly_org_partner_gateway_transactions {
@@ -203,12 +202,27 @@ join: monthly_partner_gateway_transactions {
 
 # }
 
+explore: monthly_org_partner_gateway_transactions {
+    join: monthly_partner_gateway_transactions{
+      sql_on:${monthly_org_partner_gateway_transactions.gateway_type}=${monthly_partner_gateway_transactions.gateway_type}
+        And ${monthly_org_partner_gateway_transactions.created_month}=${monthly_partner_gateway_transactions.created_month};;
+      relationship: many_to_one
+    }
+    join: monthly_gateway_partner_revenue {
+      sql_on: ${monthly_gateway_partner_revenue.gateway_type} = ${monthly_org_partner_gateway_transactions.gateway_type}
+      And ${monthly_gateway_partner_revenue.ending_month::string} = ${monthly_org_partner_gateway_transactions.created_month::string};;
+    relationship: many_to_one
+    }
+    }
+
+
 # explore: netsuite_with_indirect_revenue {
 #   extends: [transaction_lines]
 #   join: organizations {
 #     sql_on: ${customers.customer_extid} = ${organizations.key} ;;
 #     relationship: many_to_one
 #   }
+
 #   join: accounts_lava {
 #     from: accounts
 #     type: left_outer

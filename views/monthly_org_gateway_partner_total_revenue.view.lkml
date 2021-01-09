@@ -25,4 +25,7 @@ view: monthly_org_gateway_partner_total_revenue {
       type: number
     }
     dimension: gateway_type {}
+
+    # meed to add a measure for indirect and direct revenue here?
+
   }

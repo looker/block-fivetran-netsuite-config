@@ -216,6 +216,7 @@ explore: monthly_org_partner_gateway_transactions {
     }
 
 
+
 # explore: netsuite_with_indirect_revenue {
 #   extends: [transaction_lines]
 #   join: organizations {

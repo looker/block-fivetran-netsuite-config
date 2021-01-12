@@ -160,6 +160,7 @@ explore: +transaction_lines {
     sql_on: ${transaction_lines.class_id} = ${classes.class_id} ;;
     relationship: many_to_one
   }
+
   join: monthly_org_indirect_revenue {
     type: left_outer
     sql_on: ${customers.spreedly_billing_id} = ${monthly_org_indirect_revenue.organization_key}

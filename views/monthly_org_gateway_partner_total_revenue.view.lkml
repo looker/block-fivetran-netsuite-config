@@ -11,6 +11,13 @@ view: monthly_org_gateway_partner_total_revenue {
         column: gateway_type { field: monthly_gateway_partner_revenue.gateway_type }
       }
     }
+
+  dimension: primary_key {
+    sql: ${gateway_type}||${organization_key}||${ending_month} ;;
+    primary_key: yes
+
+  }
+
     dimension: organization_key {
       description: "Unique key to identify a customer in Heroku"
     }
@@ -23,10 +30,11 @@ view: monthly_org_gateway_partner_total_revenue {
 
     dimension: gateway_type {}
 
+# reference a dimension instead of a measure
     measure: total_revenue {
       type: sum
       drill_fields: [gateway_type,ending_month,transactions.sum_transaction_amount,monthly_partner_gateway_transactions.percent_of_monthly_gateway_transactions]
-      sql: ${total_indirect_revenue}+${transaction_lines.sum_transaction_amount} ;;
+      sql: ${total_indirect_revenue}+${transaction_lines.transaction_amount} ;;
     }
 
   }

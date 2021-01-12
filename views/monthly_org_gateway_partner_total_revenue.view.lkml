@@ -14,7 +14,7 @@ view: monthly_org_gateway_partner_total_revenue {
 
 # MFJ remove GWtype from primary key 1/10/20
   dimension: primary_key {
-    sql: ${organization_key}||${ending_month} ;;
+    sql: ${organization_key}||${ending_month}||${gateway_type};;
     primary_key: yes
 
   }

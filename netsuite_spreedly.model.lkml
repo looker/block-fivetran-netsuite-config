@@ -145,7 +145,6 @@ explore: transaction_lines {
   }
 }
 
-# and ${customers.gateway_type} = ${monthly_org_gateway_partner_total_revenue.gateway_type}
 
 explore: +transaction_lines {
   description: "this is the full transaction lines"
@@ -167,8 +166,6 @@ explore: +transaction_lines {
     and ${accounting_periods.ending_month} = ${monthly_org_indirect_revenue.created_month};;
     relationship: many_to_one
   }
-
-
 }
 
 

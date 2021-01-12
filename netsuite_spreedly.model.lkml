@@ -221,6 +221,7 @@ explore: monthly_org_partner_gateway_transactions {
     relationship: many_to_one
     }
     }
+
 # tried adding explore for Total revenue transactions AND adding in transaction line direct revenue
 # explore: monthly_org_gateway_partner_total_revenue {
 #   join: customers {

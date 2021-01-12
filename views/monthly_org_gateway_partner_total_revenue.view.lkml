@@ -28,11 +28,11 @@ view: monthly_org_gateway_partner_total_revenue {
     dimension: gateway_type {}
 
     # meed to add a measure for indirect and direct revenue here?
-    # measure: total_revenue {
-    #   type: sum
-    #   drill_fields: [gateway_type,ending_month,transactions.sum_transaction_amount,monthly_partner_gateway_transactions.percent_of_monthly_gateway_transactions]
-    #   sql: ${total_indirect_revenue}+${transaction_lines.sum_transaction_amount} ;;
-    # }
+    measure: total_revenue {
+      type: sum
+      drill_fields: [gateway_type,ending_month,transactions.sum_transaction_amount,monthly_partner_gateway_transactions.percent_of_monthly_gateway_transactions]
+      sql: ${total_indirect_revenue}+${transaction_lines.sum_transaction_amount} ;;
+    }
 
 
 

@@ -30,7 +30,7 @@ view: monthly_org_gateway_partner_total_revenue {
 
     dimension: gateway_type {}
 
-# reference a dimension instead of a measure
+# reference a dimension instead of a measure Or type number and two measures?
     measure: total_revenue {
       type: sum
       drill_fields: [gateway_type,ending_month,transactions.sum_transaction_amount,monthly_partner_gateway_transactions.percent_of_monthly_gateway_transactions]

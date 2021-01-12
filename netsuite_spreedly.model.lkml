@@ -222,15 +222,15 @@ explore: monthly_org_partner_gateway_transactions {
     }
 
 # MFJ 1/12/20 tried adding explore for Total revenue transactions AND adding in transaction line direct revenue
-# explore: monthly_org_gateway_partner_total_revenue {
-#   extends: [transaction_lines]
-#   join: customers {
-#     type: left_outer
-#     sql_on: ${customers.spreedly_billing_id} =${monthly_org_gateway_partner_total_revenue.organization_key}
-#     and ${customers.gateway_type} =${monthly_org_gateway_partner_total_revenue.gateway_type};;
-#     relationship: many_to_one
-#   }
-# }
+explore: monthly_org_gateway_partner_total_revenue {
+  extends: [transaction_lines]
+  join: customers {
+    type: left_outer
+    sql_on: ${customers.spreedly_billing_id} =${monthly_org_gateway_partner_total_revenue.organization_key}
+    and ${transaction_lines.date_closed_month} =${monthly_org_gateway_partner_total_revenue.ending_month};;
+    relationship: many_to_one
+  }
+}
 
 # explore: netsuite_with_indirect_revenue {
 #   extends: [transaction_lines]

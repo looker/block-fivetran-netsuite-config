@@ -34,9 +34,4 @@ view: monthly_org_gateway_partner_total_revenue {
       sql: ${total_indirect_revenue}+${transaction_lines.sum_transaction_amount} ;;
     }
 
-
-
-
-
-
   }

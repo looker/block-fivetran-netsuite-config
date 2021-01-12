@@ -150,6 +150,7 @@ explore: transaction_lines {
     relationship: many_to_one
   }
 }
+
 # and ${customers.gateway_type} = ${monthly_org_gateway_partner_total_revenue.gateway_type}
 
 explore: +transaction_lines {

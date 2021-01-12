@@ -12,8 +12,9 @@ view: monthly_org_gateway_partner_total_revenue {
       }
     }
 
+# MFJ remove GWtype from primary key 1/10/20
   dimension: primary_key {
-    sql: ${gateway_type}||${organization_key}||${ending_month} ;;
+    sql: ${organization_key}||${ending_month} ;;
     primary_key: yes
 
   }
@@ -21,6 +22,7 @@ view: monthly_org_gateway_partner_total_revenue {
     dimension: organization_key {
       description: "Unique key to identify a customer in Heroku"
     }
+
     dimension: ending_month {
       type: date_month
     }

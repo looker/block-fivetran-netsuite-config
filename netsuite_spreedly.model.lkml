@@ -143,12 +143,6 @@ explore: transaction_lines {
     sql_on: ${transaction_lines.subsidiary_id} = ${subsidiaries.subsidiary_id} ;;
     relationship: many_to_one #TODO AJC needs confirmation
   }
-  join: monthly_org_gateway_partner_total_revenue {
-    type: left_outer
-    sql_on: ${customers.spreedly_billing_id} = ${monthly_org_gateway_partner_total_revenue.organization_key}
-    and ${accounting_periods.ending_month} = ${monthly_org_gateway_partner_total_revenue.ending_month};;
-    relationship: many_to_one
-  }
 }
 
 # and ${customers.gateway_type} = ${monthly_org_gateway_partner_total_revenue.gateway_type}
@@ -167,47 +161,16 @@ explore: +transaction_lines {
     sql_on: ${transaction_lines.class_id} = ${classes.class_id} ;;
     relationship: many_to_one
   }
+  join: monthly_org_indirect_revenue {
+    type: left_outer
+    sql_on: ${customers.spreedly_billing_id} = ${monthly_org_indirect_revenue.organization_key}
+    and ${accounting_periods.ending_month} = ${monthly_org_indirect_revenue.created_month};;
+    relationship: many_to_one
+  }
 
 
-# join: monthly_partner_gateway_transactions {
-#   type: left_outer
-#   sql_on: ${transactions.transaction_month} = ${monthly_partner_gateway_transactions.created_month}
-#   And ${customers.gateway_type_raw} = ${monthly_partner_gateway_transactions.gateway_type};;
-#   relationship: many_to_one
-# }
-
-
-#   join: monthly_org_partner_gateway_transactions {
-#     type: left_outer
-#     sql_on: ${monthly_partner_gateway_transactions.created_month} = ${monthly_org_partner_gateway_transactions.created_month}
-#         And ${monthly_partner_gateway_transactions.gateway_type}} = ${monthly_org_partner_gateway_transactions.gateway_type};;
-#         # AND ${customers.spreedly_billing_id} =${monthly_org_partner_gateway_transactions.organization_key};;
-#     relationship: many_to_many
-#   }
-
-
-  # join: monthly_org_gateway_percentage {
-  #   type:  left_outer
-  #   sql_on: ${monthly_org_gateway_percentage.gateway_type} = ${customers.gateway_type}
-  #   And ${monthly_org_gateway_percentage.created_month} = ${accounting_periods.ending_month}
-  #   ;;
-  #   relationship: many_to_many
-  # }
-
-# join: monthly_org_partner_gateway_transactions {
-#   type: left_outer
-#   sql_on: ${transactions.transaction_month} = ${monthly_org_partner_gateway_transactions.created_month}
-#   And ${monthly_org_partner_gateway_transactions.gateway_key} =${transaction_lines.unique_key}
-#   AND ${customers.lava_organization} =${monthly_org_partner_gateway_transactions.organization_key};;
-
-# }
 }
-# view:+monthly_org_partner_gateway_transactions {
-#   measure:indirect_revenue{
-#   type:
-#   }
 
-# }
 
 explore: monthly_org_partner_gateway_transactions {
     join: monthly_partner_gateway_transactions{
@@ -223,15 +186,15 @@ explore: monthly_org_partner_gateway_transactions {
     }
 
 # MFJ 1/12/20 tried adding explore for Total revenue transactions AND adding in transaction line direct revenue
-explore: monthly_org_gateway_partner_total_revenue {
-  extends: [transaction_lines]
-  join: customers {
-    type: left_outer
-    sql_on: ${customers.spreedly_billing_id} =${monthly_org_gateway_partner_total_revenue.organization_key}
-    and ${transaction_lines.date_closed_month} =${monthly_org_gateway_partner_total_revenue.ending_month};;
-    relationship: many_to_one
-  }
-}
+# explore: monthly_org_gateway_partner_total_revenue {
+#   extends: [transaction_lines]
+#   join: customers {
+#     type: left_outer
+#     sql_on: ${customers.spreedly_billing_id} =${monthly_org_gateway_partner_total_revenue.organization_key}
+#     and ${transaction_lines.date_closed_month} =${monthly_org_gateway_partner_total_revenue.ending_month};;
+#     relationship: many_to_one
+#   }
+# }
 
 # explore: netsuite_with_indirect_revenue {
 #   extends: [transaction_lines]

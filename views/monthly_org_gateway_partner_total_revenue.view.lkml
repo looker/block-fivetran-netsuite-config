@@ -12,9 +12,8 @@
 #       }
 #     }
 
-# # MFJ remove GWtype from primary key 1/10/20
 #   dimension: primary_key {
-#     sql: ${organization_key}||${ending_month}||${gateway_type};;
+#     sql: ${organization_key}||${ending_month};;
 #     primary_key: yes
 
 #   }

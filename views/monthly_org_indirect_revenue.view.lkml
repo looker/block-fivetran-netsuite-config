@@ -29,11 +29,13 @@ view: monthly_org_indirect_revenue {
       hidden: yes
       description: "Unique key to identify a customer in Heroku"
     }
+
     dimension: total_indirect_revenue_raw {
       type: number
       sql: ${TABLE}.total_indirect_revenue ;;
       hidden: yes
     }
+
     measure: indirect_revenue {
       description: "Cannot be used below a monthly+Org grain. Quarterly is OK, daily is not."
       type: sum

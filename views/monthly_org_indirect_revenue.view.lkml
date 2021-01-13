@@ -13,12 +13,14 @@ view: monthly_org_indirect_revenue {
         # }
       }
     }
+
     dimension: primary_key {
       type: string
       primary_key: yes
       sql: ${organization_key}||${created_month} ;;
       hidden: yes
     }
+
     dimension: created_month {
       hidden: yes
       description: "Transaction created Date/Time"

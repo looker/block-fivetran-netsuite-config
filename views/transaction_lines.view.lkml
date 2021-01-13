@@ -986,7 +986,12 @@ view: transaction_lines {
     drill_fields: [detail*]
   }
 
-
+# measure: total_revenue {
+#   type: number
+#   value_format_name: usd
+#   sql: ${sum_transaction_amount}+${monthly_org_indirect_revenue.indirect_revenue} ;;
+#   drill_fields: [detail*]
+# }
 
   set: detail {
     fields: [

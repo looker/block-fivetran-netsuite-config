@@ -43,6 +43,13 @@ view: monthly_org_indirect_revenue {
       type: sum
       sql: ${total_indirect_revenue_raw} ;;
     }
+
+  measure: total_revenue {
+    type: number
+    value_format_name: usd
+    sql: ${transaction_lines.sum_transaction_amount}+${indirect_revenue} ;;
+  }
+
   }
 
 # dimension: indirect_revenue{

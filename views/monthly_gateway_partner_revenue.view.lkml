@@ -21,7 +21,6 @@
     # filters: {
     #   field: transaction_lines.is_transaction_non_posting
     #   value: "No"
-
     # }
 
     # filters: {
@@ -29,11 +28,9 @@
     #   value: "SGP Annual Membership Fee,SGP Revenue Share,PGP Revenue Share"
     # }
 
-
     dimension: primary_key {
       sql: ${gateway_type}||${ending_month} ;;
       primary_key: yes
-
     }
 
     dimension: gateway_type {}
@@ -47,9 +44,22 @@
       type: number
     }
 
+    # add the case and boolean and new numerator and denominator... add up revenue
+    #implementation of flag (view: gateway_rev_share_type... field:rev_share_type - either. create new table. join on table for creating boolean flag....
+    # MFJ 1/12/20 add Gateway rev share tye as table and new Revneue columns to NDTs..
+
+    dimension:  indirect_revenue_ratio{
+    hidden: yes
+    type: number
+    # sql:  case when ${gateway_rev_share_type.rev_share_type} = 'tsx' then ${monthly_org_partner_gateway_transactions.count}/${monthly_partner_gateway_transactions.count}
+    # when ${gateway_rev_share_type.rev_share_type} = 'rev' then ${monthly_org_partner_gateway_transactions.revenue}/${monthly_partner_gateway_transactions.revenue}
+    # else 0 end;;
+    sql: ${monthly_org_partner_gateway_transactions.count}/${monthly_partner_gateway_transactions.count} ;;
+    }
+
     dimension: indirect_revenue {
       type: number
-      sql: ${sum_transaction_amount}*${monthly_org_partner_gateway_transactions.count}/${monthly_partner_gateway_transactions.count} ;;
+      sql: ${sum_transaction_amount}*${indirect_revenue_ratio} ;;
     }
 
     measure: total_indirect_revenue {
@@ -61,7 +71,5 @@
       type: count
     }
 
-  # scope for the view to pull in the dimensions need three views to create this calculations...
-  # step 2 build subquery out of this and join to Netsuite explore...
 
   }

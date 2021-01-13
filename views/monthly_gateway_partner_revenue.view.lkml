@@ -10,23 +10,25 @@
         column: ending_month { field: accounting_periods.ending_month }
         column: sum_transaction_amount {}
 
-        filters: {
-          field: accounts.type_name
-          value: "Income,Other Income"
-        }
-
-        filters: {
-          field: transaction_lines.is_transaction_non_posting
-          value: "No"
-
-        }
-
-        filters: {
-          field: accounts.name
-          value: "SGP Annual Membership Fee,SGP Revenue Share,PGP Revenue Share"
-        }
       }
     }
+
+    # filters: {
+    #   field: accounts.type_name
+    #   value: "Income,Other Income"
+    # }
+
+    # filters: {
+    #   field: transaction_lines.is_transaction_non_posting
+    #   value: "No"
+
+    # }
+
+    # filters: {
+    #   field: accounts.name
+    #   value: "SGP Annual Membership Fee,SGP Revenue Share,PGP Revenue Share"
+    # }
+
 
     dimension: primary_key {
       sql: ${gateway_type}||${ending_month} ;;

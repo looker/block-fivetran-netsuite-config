@@ -39,9 +39,12 @@
       type: date_month
     }
 
+# what is this support to be capturing? Revenue?
     dimension: sum_transaction_amount {
       value_format: "$#,##0.00"
       type: number
+      # sql: where ${income_accounts.is_income_account} = 'yes'
+      # and where ${transaction_lines.is_transaction_non_posting} = 'no';;
     }
 
     # add the case and boolean and new numerator and denominator... add up revenue

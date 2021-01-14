@@ -54,17 +54,20 @@
     sql:  case when ${monthly_org_partner_gateway_transactions.rev_share_type} = 'tsx' then ${monthly_org_partner_gateway_transactions.count}/${monthly_partner_gateway_transactions.count}
     when ${monthly_org_partner_gateway_transactions.rev_share_type} = 'rev' then ${monthly_org_partner_gateway_transactions.topline_revenue}/${monthly_partner_gateway_transactions.topline_revenue}
     else 0 end;;
-    # sql: ${monthly_org_partner_gateway_transactions.count}/${monthly_partner_gateway_transactions.count} ;;
     }
 
     dimension: indirect_revenue {
       type: number
       sql: ${sum_transaction_amount}*${indirect_revenue_ratio} ;;
+      drill_fields: [monthly_org_partner_gateway_transactions.count,monthly_org_partner_gateway_transactions.topline_revenue,monthly_org_partner_gateway_transactions.count,gateway_type,sum_transaction_amount ]
+
     }
 
     measure: total_indirect_revenue {
       type: sum
       sql: ${indirect_revenue} ;;
+    drill_fields: [monthly_org_partner_gateway_transactions.count,monthly_org_partner_gateway_transactions.topline_revenue,monthly_org_partner_gateway_transactions.count,gateway_type,sum_transaction_amount ]
+
     }
 
    measure: count {

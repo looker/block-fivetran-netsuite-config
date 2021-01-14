@@ -42,6 +42,7 @@ view: monthly_org_indirect_revenue {
       description: "Cannot be used below a monthly+Org grain. Quarterly is OK, daily is not."
       type: sum
       sql: ${total_indirect_revenue_raw} ;;
+      drill_fields: [customers.gateway_type, customers.name]
     }
 
   measure: total_revenue {

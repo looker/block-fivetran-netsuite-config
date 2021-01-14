@@ -169,7 +169,7 @@ explore: +transaction_lines {
   }
 }
 
-
+# MFJ 1/15/20 added join to see indirect fields on indirect revenue to check
 explore: monthly_org_partner_gateway_transactions {
     join: monthly_partner_gateway_transactions{
       sql_on:${monthly_org_partner_gateway_transactions.netsuite_gateway_type}=${monthly_partner_gateway_transactions.netsuite_gateway_type}
@@ -181,6 +181,7 @@ explore: monthly_org_partner_gateway_transactions {
       And ${monthly_gateway_partner_revenue.ending_month::string} = ${monthly_org_partner_gateway_transactions.created_month::string};;
     relationship: many_to_one
     }
+
     }
 
 # MFJ 1/12/20 tried adding explore for Total revenue transactions AND adding in transaction line direct revenue

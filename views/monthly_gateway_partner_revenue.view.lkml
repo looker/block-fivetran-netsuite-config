@@ -49,7 +49,7 @@
     # MFJ 1/12/20 add Gateway rev share tye as table and new Revneue columns to NDTs..
 
     dimension:  indirect_revenue_ratio{
-    hidden: yes
+    hidden: no
     type: number
     sql:  case when ${monthly_org_partner_gateway_transactions.rev_share_type} = 'tsx' then ${monthly_org_partner_gateway_transactions.count}/${monthly_partner_gateway_transactions.count}
     when ${monthly_org_partner_gateway_transactions.rev_share_type} = 'rev' then ${monthly_org_partner_gateway_transactions.topline_revenue}/${monthly_partner_gateway_transactions.topline_revenue}

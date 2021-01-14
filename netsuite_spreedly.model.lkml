@@ -27,6 +27,7 @@ include: "//spreedly/heroku_kafka/heroku_kafka.model"
 #   sql_trigger: select count(*) from "SNOWPIPE"."TRANSACTIONS" ;;
 # }
 
+
 explore: balance_sheet {
   extends: [balance_sheet_core]
 }

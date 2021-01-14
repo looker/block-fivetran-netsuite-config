@@ -51,10 +51,10 @@
     dimension:  indirect_revenue_ratio{
     hidden: yes
     type: number
-    # sql:  case when ${gateway_rev_share_type.rev_share_type} = 'tsx' then ${monthly_org_partner_gateway_transactions.count}/${monthly_partner_gateway_transactions.count}
-    # when ${gateway_rev_share_type.rev_share_type} = 'rev' then ${monthly_org_partner_gateway_transactions.revenue}/${monthly_partner_gateway_transactions.revenue}
-    # else 0 end;;
-    sql: ${monthly_org_partner_gateway_transactions.count}/${monthly_partner_gateway_transactions.count} ;;
+    sql:  case when ${monthly_org_partner_gateway_transactions.rev_share_type} = 'tsx' then ${monthly_org_partner_gateway_transactions.count}/${monthly_partner_gateway_transactions.count}
+    when ${monthly_org_partner_gateway_transactions.rev_share_type} = 'rev' then ${monthly_org_partner_gateway_transactions.topline_revenue}/${monthly_partner_gateway_transactions.topline_revenue}
+    else 0 end;;
+    # sql: ${monthly_org_partner_gateway_transactions.count}/${monthly_partner_gateway_transactions.count} ;;
     }
 
     dimension: indirect_revenue {

@@ -172,12 +172,12 @@ explore: +transaction_lines {
 
 explore: monthly_org_partner_gateway_transactions {
     join: monthly_partner_gateway_transactions{
-      sql_on:${monthly_org_partner_gateway_transactions.gateway_type}=${monthly_partner_gateway_transactions.gateway_type}
+      sql_on:${monthly_org_partner_gateway_transactions.netsuite_gateway_type}=${monthly_partner_gateway_transactions.netsuite_gateway_type}
         And ${monthly_org_partner_gateway_transactions.created_month}=${monthly_partner_gateway_transactions.created_month};;
       relationship: many_to_one
     }
     join: monthly_gateway_partner_revenue {
-      sql_on: ${monthly_gateway_partner_revenue.gateway_type} = ${monthly_org_partner_gateway_transactions.gateway_type}
+      sql_on: ${monthly_gateway_partner_revenue.gateway_type} = ${monthly_org_partner_gateway_transactions.netsuite_gateway_type}
       And ${monthly_gateway_partner_revenue.ending_month::string} = ${monthly_org_partner_gateway_transactions.created_month::string};;
     relationship: many_to_one
     }

@@ -54,7 +54,6 @@
     }
 
     dimension: indirect_revenue {
-      value_format: "$#,##0"
       type: number
       sql: ${sum_transaction_amount}*${indirect_revenue_ratio} ;;
       drill_fields: [monthly_org_partner_gateway_transactions.count,monthly_org_partner_gateway_transactions.topline_revenue,monthly_org_partner_gateway_transactions.count,gateway_type,sum_transaction_amount ]
@@ -62,7 +61,6 @@
     }
 
     measure: total_indirect_revenue {
-      value_format: "$#,##0"
       type: sum
       sql: ${indirect_revenue} ;;
     drill_fields: [monthly_org_partner_gateway_transactions.count,monthly_org_partner_gateway_transactions.topline_revenue,monthly_org_partner_gateway_transactions.count,gateway_type,sum_transaction_amount ]

@@ -35,7 +35,7 @@
 
 # what is this support to be capturing? Revenue?
     dimension: sum_transaction_amount {
-      value_format: "$#,##0.00"
+      value_format: "$#,##0"
       type: number
       # sql: where ${income_accounts.is_income_account} = 'yes'
       # and where ${transaction_lines.is_transaction_non_posting} = 'no';;
@@ -54,6 +54,7 @@
     }
 
     dimension: indirect_revenue {
+      value_format: "$#,##0"
       type: number
       sql: ${sum_transaction_amount}*${indirect_revenue_ratio} ;;
       drill_fields: [monthly_org_partner_gateway_transactions.count,monthly_org_partner_gateway_transactions.topline_revenue,monthly_org_partner_gateway_transactions.count,gateway_type,sum_transaction_amount ]
@@ -61,6 +62,7 @@
     }
 
     measure: total_indirect_revenue {
+      value_format: "$#,##0"
       type: sum
       sql: ${indirect_revenue} ;;
     drill_fields: [monthly_org_partner_gateway_transactions.count,monthly_org_partner_gateway_transactions.topline_revenue,monthly_org_partner_gateway_transactions.count,gateway_type,sum_transaction_amount ]

@@ -168,16 +168,49 @@ explore: +transaction_lines {
     and ${accounting_periods.ending_month} = ${monthly_org_indirect_revenue.created_month};;
     relationship: many_to_one
   }
+# prefix labels to Lava or Spreedly --> View Label
+#netsuite transactions are called "Transactions" Spreedly is called transactions_Spreedly view was renamed
+  join: organizations {
+    type: left_outer
+    view_label: "Spreedly Organizations"
+    sql_on: ${customers.spreedly_billing_id}=${organizations.key} ;;
+    relationship: many_to_one
+  }
+
+  join: accounts_spreedly {
+    from: accounts
+    type: left_outer
+    sql_on: ${organizations.key}=${accounts_spreedly.organization_key} ;;
+    relationship: many_to_one
+  }
+
+  join: transactions_spreedly {
+    from: transactions
+    type: left_outer
+    sql_on: ${accounts_spreedly.key} = ${transactions_spreedly.account_key}
+      and ${accounting_periods.ending_month} = ${transactions_spreedly.created_month};;
+    relationship: many_to_one
+  }
+
+  join: gateways {
+    type: left_outer
+    sql_on: ${transactions_spreedly.gateway_key}=${gateways.key} ;;
+    relationship: many_to_one
+  }
+
+
 }
 
 # MFJ 1/15/20 added join to see indirect fields on indirect revenue to check
 explore: monthly_org_partner_gateway_transactions {
-    join: monthly_partner_gateway_transactions{
+   join: monthly_partner_gateway_transactions{
+    type: left_outer
       sql_on:${monthly_org_partner_gateway_transactions.netsuite_gateway_type}=${monthly_partner_gateway_transactions.netsuite_gateway_type}
         And ${monthly_org_partner_gateway_transactions.created_month}=${monthly_partner_gateway_transactions.created_month};;
       relationship: many_to_one
     }
     join: monthly_gateway_partner_revenue {
+      type: left_outer
       sql_on: ${monthly_gateway_partner_revenue.gateway_type} = ${monthly_org_partner_gateway_transactions.netsuite_gateway_type}
       And ${monthly_gateway_partner_revenue.ending_month::string} = ${monthly_org_partner_gateway_transactions.created_month::string};;
     relationship: many_to_one

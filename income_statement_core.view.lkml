@@ -37,7 +37,7 @@ view: income_statement {
       where reporting_accounting_periods.fiscal_calendar_id  = (select
                                                                   fiscal_calendar_id
                                                                 from @{SCHEMA_NAME}.subsidiaries
-                                                                where parent_id is null)
+                                                                where parent_id is null    group by 1)
         and transactions_with_converted_amounts.transaction_accounting_period_id = transactions_with_converted_amounts.reporting_accounting_period_id
         and transactions_with_converted_amounts.is_income_statement
       ;;

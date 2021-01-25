@@ -103,7 +103,7 @@ view: transaction_details {
         or accounting_periods.fiscal_calendar_id  = (select
                                                       fiscal_calendar_id
                                                     from @{SCHEMA_NAME}.subsidiaries
-                                                    where parent_id is null))
+                                                    where parent_id is null    group by 1))
        ;;
   }
 

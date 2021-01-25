@@ -77,11 +77,11 @@ view: balance_sheet {
       where reporting_accounting_periods.fiscal_calendar_id = (select
                                                                  fiscal_calendar_id
                                                                from @{SCHEMA_NAME}.subsidiaries
-                                                               where parent_id is null)
+                                                               where parent_id is null    group by 1)
         and transaction_accounting_periods.fiscal_calendar_id = (select
                                                                    fiscal_calendar_id
                                                                  from @{SCHEMA_NAME}.subsidiaries
-                                                                 where parent_id is null)
+                                                                 where parent_id is null    group by 1)
         and (lower(accounts.is_balancesheet) = 't'
           or transactions_with_converted_amounts.is_income_statement)
 
@@ -110,7 +110,7 @@ view: balance_sheet {
       where reporting_accounting_periods.fiscal_calendar_id = (select
                                                                  fiscal_calendar_id
                                                                from @{SCHEMA_NAME}.subsidiaries
-                                                               where parent_id is null)
+                                                               where parent_id is null    group by 1)
         and (lower(accounts.is_balancesheet) = 't'
           or transactions_with_converted_amounts.is_income_statement)
       ;;

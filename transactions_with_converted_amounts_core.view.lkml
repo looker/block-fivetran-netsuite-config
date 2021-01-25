@@ -16,7 +16,7 @@ view: period_exchange_rate_map {
           select
             subsidiary_id
           from ${subsidiaries.SQL_TABLE_NAME} as subsidiaries
-          where parent_id is null  -- constrait - only the primary subsidiary has no parent
+          where parent_id is null    group by 1  -- constrait - only the primary subsidiary has no parent
           )
           and consolidated_exchange_rates.accounting_book_id in (
             select
@@ -90,7 +90,7 @@ view: period_id_list_to_current_period {
           and base.fiscal_calendar_id = (select
                                           fiscal_calendar_id
                                         from ${subsidiaries.SQL_TABLE_NAME}
-                                        where parent_id is null) -- fiscal calendar will align with parent subsidiary's default calendar
+                                        where parent_id is null    group by 1) -- fiscal calendar will align with parent subsidiary's default calendar
         group by 1
           ;;
   }

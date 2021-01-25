@@ -1,5 +1,6 @@
 view: monthly_org_indirect_revenue {
   derived_table: {
+    datagroup_trigger: whitelist_etl
       explore_source: monthly_org_partner_gateway_transactions {
         column: created_month {}
         # column: gateway_type {}
@@ -42,8 +43,11 @@ view: monthly_org_indirect_revenue {
       description: "Cannot be used below a monthly+Org grain. Quarterly is OK, daily is not."
       type: sum
       sql: ${total_indirect_revenue_raw} ;;
-      drill_fields: [customers.gateway_type, customers.name]
+      drill_fields: [customers.customer_company_name, monthly_org_partner_gateway_transactions.transactions]
     }
+# transactions_spreedly.detail*
+# gateway_summary.heroku_gateway_type,gateways.gateway_type
+
 
   measure: total_revenue {
     type: number

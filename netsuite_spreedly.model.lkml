@@ -168,7 +168,7 @@ explore: +transaction_lines {
     and ${accounting_periods.ending_month} = ${monthly_org_indirect_revenue.created_month};;
     relationship: many_to_one
   }
-# prefix labels to Lava or Spreedly --> View Label
+
 #netsuite transactions are called "Transactions" Spreedly is called transactions_Spreedly view was renamed
   join: organizations {
     type: left_outer
@@ -198,8 +198,30 @@ explore: +transaction_lines {
     relationship: many_to_one
   }
 
+  join: gateway_summary {
+    type: left_outer
+    sql_on: ${gateways.gateway_type} = ${gateway_summary.heroku_gateway_type};;
+    relationship: many_to_one
+  }
+
+  join: monthly_org_partner_gateway_transactions{
+    type: left_outer
+    sql_on:${monthly_org_partner_gateway_transactions.netsuite_gateway_type}=${gateway_summary.netsuite_gateway_type}
+      And ${monthly_org_partner_gateway_transactions.organization_key} = ${customers.spreedly_billing_id}
+      And ${monthly_org_partner_gateway_transactions.created_month}=${accounting_periods.ending_month} ;;
+    relationship: many_to_one
+  }
+
+
+  join: monthly_partner_gateway_transactions{
+    type: left_outer
+    sql_on:${monthly_org_partner_gateway_transactions.netsuite_gateway_type}=${gateway_summary.netsuite_gateway_type}
+      And ${monthly_org_partner_gateway_transactions.created_month}=${accounting_periods.ending_month} ;;
+    relationship: many_to_one
+}
 
 }
+
 
 # MFJ 1/15/20 added join to see indirect fields on indirect revenue to check
 explore: monthly_org_partner_gateway_transactions {

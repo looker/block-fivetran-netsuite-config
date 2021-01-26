@@ -1,4 +1,4 @@
-# connection: "snowflake" #this needs to be personalized
+connection: "snowflake" #this needs to be personalized
 label: "Netsuite"
 # include: "//block-fivetran-netsuite-spreedly/*.view"
 
@@ -15,7 +15,10 @@ include: "/views/*.view.lkml"
 
 include: "//spreedly/heroku_kafka/views/*.view"
 include: "customer_daily_income_transaction_details_summary.view"
-include: "//spreedly/heroku_kafka/heroku_kafka.model"
+include: "//spreedly/heroku_kafka/config.lkml"
+
+# include: "//spreedly/heroku_kafka/heroku_kafka.model"
+
 # shortcut pulling in all model
 
 # include: "//spreedly/heroku_kafka/customer_health_score.layer.lkml"

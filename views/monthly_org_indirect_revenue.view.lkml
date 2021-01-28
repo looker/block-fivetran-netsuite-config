@@ -49,6 +49,13 @@ view: monthly_org_indirect_revenue {
 # transactions_spreedly.detail*
 # gateway_summary.heroku_gateway_type,gateways.gateway_type
 
+  measure: indirect_revenue_percent_of_total_revenue {
+    description: "Cannot be used below a monthly+Org grain. Quarterly is OK, daily is not."
+    type: number
+    value_format_name: percent_0
+    sql: ${indirect_revenue}/nullif(${total_revenue},0) ;;
+    drill_fields: [customers.customer_company_name, monthly_org_partner_gateway_transactions.transactions]
+  }
 
   measure: total_revenue {
     type: number

@@ -3,6 +3,8 @@ include: "/views/*.view.lkml"
 
 include: "//spreedly/heroku_kafka/views/*.view"
 include: "/customer_daily_income_transaction_details_summary.view"
+include: "//spreedly/salesforce/views/account.view"
+
 
 # Suggested filters/ Alwasys filter default yes -  for income transaction details:Account type: Income/Other income,Non posting: No
 

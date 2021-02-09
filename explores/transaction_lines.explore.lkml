@@ -105,6 +105,14 @@ explore: transaction_lines {
     sql_on: ${transaction_lines.subsidiary_id} = ${subsidiaries.subsidiary_id} ;;
     relationship: many_to_one #TODO AJC needs confirmation
   }
+
+  join: budget {
+    type: left_outer
+    sql_on: ${transaction_lines.account_id} = ${budget.account_id};;
+    relationship: many_to_one #TODO AJC needs confirmation
+  }
+
+
 }
 
 

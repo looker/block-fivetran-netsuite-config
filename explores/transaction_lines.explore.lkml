@@ -108,7 +108,8 @@ explore: transaction_lines {
 
   join: budget {
     type: left_outer
-    sql_on: ${transaction_lines.account_id} = ${budget.account_id};;
+    sql_on: ${transaction_lines.account_id} = ${budget.account_id}
+    and ${transactions.accounting_period_id} = ${budget.accounting_period_id};;
     relationship: many_to_one #TODO AJC needs confirmation
   }
 

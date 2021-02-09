@@ -112,6 +112,12 @@ explore: transaction_lines {
     relationship: many_to_one #TODO AJC needs confirmation
   }
 
+  join: budget_category {
+    type: left_outer
+    sql_on: ${budget.category_id} = ${budget_category.budget_category_id};;
+    relationship: many_to_one #TODO AJC needs confirmation
+  }
+
 
 }
 

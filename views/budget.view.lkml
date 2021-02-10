@@ -62,6 +62,7 @@ view: budget {
     sql: CAST(${TABLE}."BUDGET_DATE" AS TIMESTAMP_NTZ) ;;
   }
 
+
   dimension: category_id {
     type: number
     sql: ${TABLE}."CATEGORY_ID" ;;
@@ -115,4 +116,15 @@ view: budget {
     type: count
     drill_fields: [budget_id]
   }
+
+  measure: sum_amount {
+    type: sum
+    value_format_name: usd
+    sql: ${amount} ;;
+    # drill_fields: [detail*]
+
+  }
+
+
+
 }

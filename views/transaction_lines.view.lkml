@@ -986,11 +986,11 @@ view: transaction_lines {
     drill_fields: [detail*]
   }
 
-  measure: Budget_Variance {
-    type: number
-    value_format_name: usd
-    sql: ${sum_transaction_amount}-${budget.amount} ;;
-  }
+  # measure: Budget_Variance {
+  #   type: number
+  #   value_format_name: usd
+  #   sql: ${sum_transaction_amount}-${budget.amount} ;;
+  # }
 
 
 

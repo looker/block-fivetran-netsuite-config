@@ -111,7 +111,7 @@ explore: transaction_lines {
     type: left_outer
     sql_on: ${customers.customer_id} = ${customer_budget.customer_id}
     and ${transactions.accounting_period_id} = ${customer_budget.accounting_period_id};;
-    relationship: many_to_one #TODO AJC needs confirmation
+    relationship: many_to_one
   }
 
   join: budget {
@@ -119,7 +119,7 @@ explore: transaction_lines {
     type: left_outer
     sql_on: ${transaction_lines.account_id} = ${budget.account_id}
           and ${transactions.accounting_period_id} = ${budget.accounting_period_id};;
-    relationship: many_to_one #TODO AJC needs confirmation
+    relationship: many_to_one
   }
 
 

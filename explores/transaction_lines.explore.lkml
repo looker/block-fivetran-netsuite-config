@@ -106,12 +106,23 @@ explore: transaction_lines {
     relationship: many_to_one #TODO AJC needs confirmation
   }
 
-  join: budget {
+  join: customer_budget {
+    from: budget
     type: left_outer
-    sql_on: ${transaction_lines.account_id} = ${budget.account_id}
-    and ${transactions.accounting_period_id} = ${budget.accounting_period_id};;
+    sql_on: ${customers.customer_id} = ${customer_budget.customer_id}
+    and ${transactions.accounting_period_id} = ${customer_budget.accounting_period_id};;
     relationship: many_to_one #TODO AJC needs confirmation
   }
+
+  join: budget {
+    from:  budget
+    type: left_outer
+    sql_on: ${transaction_lines.account_id} = ${budget.account_id}
+          and ${transactions.accounting_period_id} = ${budget.accounting_period_id};;
+    relationship: many_to_one #TODO AJC needs confirmation
+  }
+
+
 
   join: budget_category {
     type: left_outer

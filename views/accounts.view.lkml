@@ -195,6 +195,10 @@ view: accounts_netsuite {
   dimension: name_group {
 
     sql: case
+
+
+
+
                 when ${name} = 'Online services' then 'Operating Expense - COS'
                 when ${name} = 'COS Salary' then 'Headcount - COS'
                 when ${name} = 'Hosting' then 'Operating Expense - COS'

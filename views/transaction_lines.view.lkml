@@ -993,7 +993,10 @@ view: transaction_lines {
   }
 
 
+  parameter: selector_date  {
+    type: date
 
+  }
 
 
 # measure: total_revenue {

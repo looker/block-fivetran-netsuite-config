@@ -209,7 +209,7 @@ view: accounts_netsuite {
                 when ${name} = 'COS Payroll Taxes' then 'Headcount - COS'
                 when ${name} = 'COS Phone Bills' then 'Operating Expense - COS'
                 when ${name} = 'Conferences' then 'Operating Expense - COS'
-                when ${name} = 'COS Bonus' then 'Operating Expense - COS'
+                when ${name} = 'COS Bonus' then 'Headcount - COS'
                 when ${name} = '401k Employer Match' then 'Headcount - COS'
                 when ${name} = 'Employee Insurance' then 'Headcount - COS'
                 when ${name} = 'Computer and Internet Expenses' then 'Operating Expense - COS'

@@ -986,11 +986,36 @@ view: transaction_lines {
     drill_fields: [detail*]
   }
 
+  measure: total_income{
+    type: sum
+    value_format_name: usd
+    sql: ${transaction_amount} ;;
+    filters: [accounts.type_name: "Income"]
+
+  }
+
+  measure: total_cos{
+    type: sum
+    value_format_name: usd
+    sql: ${transaction_amount} ;;
+    filters: [accounts.type_name: "Cost of Goods Sold"]
+
+  }
+
+
+  measure: gross_profit{
+    type: number
+    value_format_name: usd
+    sql: ${total_income}-${total_cos} ;;
+  }
+
+
   measure: Budget_Variance {
     type: number
     value_format_name: usd
     sql: ${sum_transaction_amount}-${budget.sum_amount} ;;
   }
+
 
 
   parameter: selector_date  {

@@ -191,6 +191,42 @@ view: accounts_netsuite {
     sql: ${TABLE}."NAME" ;;
   }
 
+
+  dimension: name_group {
+
+    sql: case
+
+
+                when ${name} = 'COS Salary' then 'Headcount - COS'
+                when ${name} = 'Hosting' then 'Operating Expense - COS'
+                when ${name} = 'COS Account Updater Fees' then 'Operating Expense - COS'
+                when ${name} = 'Continuing Education' then 'Operating Expense - COS'
+                when ${name} = 'COS Merchant Account Fees' then 'Operating Expense - COS'
+                when ${name} = 'COS Consulting' then 'Operating Expense - COS'
+                when ${name} = 'COS Online Services' then 'Operating Expense - COS'
+                when ${name} = 'COS PCI' then 'Operating Expense - COS'
+                when ${name} = 'COS EE Insurance' then 'Headcount - COS'
+                when ${name} = 'COS Payroll Taxes' then 'Headcount - COS'
+                when ${name} = 'COS Phone Bills' then 'Operating Expense - COS'
+                when ${name} = 'Conferences' then 'Operating Expense - COS'
+                when ${name} = 'COS Bonus' then 'Operating Expense - COS'
+                when ${name} = '401k Employer Match' then 'Headcount - COS'
+                when ${name} = 'Employee Insurance' then 'Headcount - COS'
+                when ${name} = 'Computer and Internet Expenses' then 'Operating Expense - COS'
+                when ${name} = 'Expense - Ask my Accountant' then 'Operating Expense - COS'
+
+
+                       else ''
+                          end
+                        ;;
+  }
+
+
+# when ${name} = 'Online services' then 'Operating Expense - COS'
+
+
+
+
   dimension: parent_account_name {
     type: string
     sql: coalesce(${parent_account.name},${accounts.name}) ;;

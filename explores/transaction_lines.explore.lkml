@@ -37,7 +37,8 @@ explore: transaction_lines {
 
   join: dt_all_accounts_and_accounting_periods {
     type: full_outer
-    sql_on: ${dt_all_accounts_and_accounting_periods.account_id} = ${transaction_lines.account_id} AND ${transactions.accounting_period_id} = ${dt_all_accounts_and_accounting_periods.accounting_period_id};;
+    sql_on: ${dt_all_accounts_and_accounting_periods.account_id} = ${transaction_lines.account_id}
+    AND ${transactions.accounting_period_id} = ${dt_all_accounts_and_accounting_periods.accounting_period_id};;
     relationship: many_to_one
   }
 

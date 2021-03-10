@@ -990,7 +990,7 @@ view: transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_amount} ;;
-    filters: [accounts.type_name: "Income"]
+    filters: [accounts.type_name: "Income" , is_this_month: "Yes"]
 
   }
 
@@ -998,7 +998,8 @@ view: transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_amount} ;;
-    filters: [accounts.type_name: "Cost of Goods Sold"]
+    filters: [accounts.type_name: "Cost of Goods Sold", is_this_month: "Yes"]
+
 
   }
 

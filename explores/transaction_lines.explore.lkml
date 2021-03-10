@@ -120,7 +120,8 @@ explore: transaction_lines {
     from: budget
     type: left_outer
     sql_on: ${customers.customer_id} = ${customer_budget.customer_id}
-    and ${dt_all_accounts_and_accounting_periods.accounting_period_id} = ${customer_budget.accounting_period_id};;
+    and ${transactions.accounting_period_id} = ${customer_budget.accounting_period_id}
+    and not ${customer_budget._fivetran_deleted};;
     relationship: many_to_one
   }
 
@@ -136,7 +137,7 @@ explore: transaction_lines {
   join: budget_category {
     type: left_outer
     sql_on: ${budget.category_id} = ${budget_category.budget_category_id};;
-    relationship: many_to_one #TODO AJC needs confirmation
+    relationship: many_to_one
   }
 
 

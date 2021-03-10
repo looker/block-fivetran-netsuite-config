@@ -196,6 +196,15 @@ view: accounts_netsuite {
     sql: coalesce(${parent_account.name},${accounts.name}) ;;
   }
 
+  dimension: category {
+    type: string
+    sql: CASE WHEN ${parent_account_name} in ('Contract Revenue', 'MtM Subscription Rev') THEN 'Subscription Revenue'
+    WHEN ${parent_account_name} in ('Account Updater Revenue', 'Conference Income', 'Gateway Revenue Share', 'Professional Services - Income') THEN 'Income'
+    WHEN ${parent_account_name} in ('', '') THEN 'Cost of Sales'
+    END
+    ;;
+  }
+
   dimension: is_account_intercompany {
     type: yesno
     sql: lower(${name}) like '%intercompany%' ;;

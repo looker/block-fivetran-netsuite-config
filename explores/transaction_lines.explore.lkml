@@ -18,6 +18,7 @@ explore: transaction_lines {
                                                       where parent_id is null    group by 1)
     )
     ;;
+
   join: transactions {
     from: transactions_netsuite
     type: left_outer #TODO AJC This was actually listed as just "join" but i don't know the snowflake default
@@ -31,13 +32,19 @@ explore: transaction_lines {
         and ${transaction_lines.transaction_id} = ${transactions_with_converted_amounts.transaction_id}
         and ${transactions_with_converted_amounts.reporting_accounting_period_id} = ${transactions_with_converted_amounts.transaction_accounting_period_id}
  ;;
-    relationship: many_to_many #TODO AJC Needs confirmation
+    relationship: many_to_many #TODO AJC Needs confirmation - the last 'and' statement is matching the same field to itself
+  }
+
+  join: dt_all_accounts_and_accounting_periods {
+    type: full_outer
+    sql_on: ${dt_all_accounts_and_accounting_periods.account_id} = ${transaction_lines.account_id} AND ${transactions.accounting_period_id} = ${dt_all_accounts_and_accounting_periods.accounting_period_id};;
+    relationship: many_to_one
   }
 
   join: accounts {
     from: accounts_netsuite
     type: left_outer
-    sql_on: ${transaction_lines.account_id} = ${accounts.account_id} ;;
+    sql_on: ${dt_all_accounts_and_accounting_periods.account_id} = ${accounts.account_id} ;;
     relationship: many_to_one #TODO AJC needs confirmation
   }
   join: parent_account {
@@ -47,7 +54,7 @@ explore: transaction_lines {
   }
   join: accounting_periods {
     type: left_outer
-    sql_on: ${transactions.accounting_period_id} = ${accounting_periods.accounting_period_id} ;;
+    sql_on: ${dt_all_accounts_and_accounting_periods.accounting_period_id} = ${accounting_periods.accounting_period_id} ;;
     relationship: many_to_one #TODO AJC needs confirmation
   }
   join: income_accounts {
@@ -117,8 +124,9 @@ explore: transaction_lines {
   join: budget {
     from:  budget
     type: left_outer
-    sql_on: ${transaction_lines.account_id} = ${budget.account_id}
-          and ${transactions.accounting_period_id} = ${budget.accounting_period_id};;
+    sql_on: ${dt_all_accounts_and_accounting_periods.account_id} = ${budget.account_id}
+          and ${dt_all_accounts_and_accounting_periods.accounting_period_id} = ${budget.accounting_period_id}
+          and not ${budget._fivetran_deleted};;
     relationship: many_to_one
   }
 

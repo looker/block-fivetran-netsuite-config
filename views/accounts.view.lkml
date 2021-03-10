@@ -197,9 +197,6 @@ view: accounts_netsuite {
     sql: case
 
 
-
-
-                when ${name} = 'Online services' then 'Operating Expense - COS'
                 when ${name} = 'COS Salary' then 'Headcount - COS'
                 when ${name} = 'Hosting' then 'Operating Expense - COS'
                 when ${name} = 'COS Account Updater Fees' then 'Operating Expense - COS'
@@ -225,7 +222,7 @@ view: accounts_netsuite {
   }
 
 
-
+# when ${name} = 'Online services' then 'Operating Expense - COS'
 
 
 

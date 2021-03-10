@@ -122,8 +122,6 @@ explore: transaction_lines {
     relationship: many_to_one
   }
 
-
-
   join: budget_category {
     type: left_outer
     sql_on: ${budget.category_id} = ${budget_category.budget_category_id};;

@@ -2,8 +2,8 @@ view: dt_all_accounts_and_accounting_periods {
   derived_table: {
     sql: SELECT account_id, accounting_period_id
         FROM NETSUITE.ACCOUNTS
-        CROSS JOIN NETSUITE.ACCOUNTING_PERIODS
-        CROSS JOIN NETSUITE.CUSTOMERS;;
+        CROSS JOIN NETSUITE.ACCOUNTING_PERIODS;;
+      # CROSS JOIN NETSUITE.CUSTOMERS
     persist_for: "24 hours"
   }
 

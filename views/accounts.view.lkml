@@ -234,11 +234,20 @@ view: accounts_netsuite {
 
   dimension: category {
     type: string
-    sql: CASE WHEN ${parent_account_name} in ('Contract Revenue', 'MtM Subscription Rev') THEN 'Subscription Revenue'
+    sql: CASE WHEN ${parent_account_name} in ('Contract Revenue', 'MtM Subscription Rev') THEN 'Income'
     WHEN ${parent_account_name} in ('Account Updater Revenue', 'Conference Income', 'Gateway Revenue Share', 'Professional Services - Income') THEN 'Income'
-    WHEN ${parent_account_name} in ('', '') THEN 'Cost of Sales'
+    WHEN ${name_group} in ('Headcount - COS', 'Operating Expense - COS') THEN 'Cost of Sales'
     END
     ;;
+  }
+
+  dimension: subcategory {
+    type: string
+    sql: CASE WHEN ${parent_account_name} in ('Contract Revenue', 'MtM Subscription Rev') THEN 'Subscription Revenue'
+          WHEN ${parent_account_name} in ('Account Updater Revenue', 'Conference Income', 'Gateway Revenue Share', 'Professional Services - Income') THEN 'Other Income'
+          WHEN ${name_group} in ('Headcount - COS', 'Operating Expense - COS') THEN 'Cost of Sales'
+          END
+          ;;
   }
 
   dimension: is_account_intercompany {

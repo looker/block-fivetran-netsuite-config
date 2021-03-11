@@ -986,7 +986,7 @@ view: transaction_lines {
     drill_fields: [detail*]
   }
 
-  measure: total_income{
+  measure: total_income_this_month{
     type: sum
     value_format_name: usd
     sql: ${transaction_amount} ;;
@@ -994,7 +994,7 @@ view: transaction_lines {
 
   }
 
-  measure: total_cos{
+  measure: total_cos_this_month{
     type: sum
     value_format_name: usd
     sql: ${transaction_amount} ;;
@@ -1004,10 +1004,10 @@ view: transaction_lines {
   }
 
 
-  measure: gross_profit{
+  measure: gross_profit_this_month{
     type: number
-    value_format_name: usd
-    sql: ${total_income}-${total_cos} ;;
+    value_format_name: usd_0
+    sql: ${total_income_this_month}-${total_cos_this_month} ;;
   }
 
 

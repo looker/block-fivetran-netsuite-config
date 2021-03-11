@@ -92,6 +92,7 @@ view: +transaction_lines {
   measure: total_income_this_month{
     view_label: "Monthly YTD Financials"
     group_label: "Actuals"
+    hidden: yes
     type: sum
     value_format_name: usd
     sql: ${transaction_lines.transaction_amount} ;;
@@ -101,6 +102,7 @@ view: +transaction_lines {
   measure: total_cos_this_month{
     view_label: "Monthly YTD Financials"
     group_label: "Actuals"
+    hidden: yes
     type: sum
     value_format_name: usd
     sql: ${transaction_lines.transaction_amount} ;;
@@ -113,6 +115,65 @@ view: +transaction_lines {
     type: number
     value_format_name: usd_0
     sql: ${total_income_this_month}-${total_cos_this_month} ;;
+  }
+
+  measure: total_income_this_month_prior_year{
+    view_label: "Monthly YTD Financials"
+    group_label: "Actuals"
+    hidden: yes
+    type: sum
+    value_format_name: usd
+    sql: ${transaction_lines.transaction_amount} ;;
+    filters: [accounts.category: "Income" , is_this_month_prior_year: "Yes"]
+  }
+
+  measure: total_cos_this_month_prior_year{
+    view_label: "Monthly YTD Financials"
+    group_label: "Actuals"
+    hidden: yes
+    type: sum
+    value_format_name: usd
+    sql: ${transaction_lines.transaction_amount} ;;
+    filters: [accounts.category: "Cost of Sales", is_this_month_prior_year: "Yes"]
+  }
+
+  measure: gross_profit_this_month_prior_year{
+    view_label: "Monthly YTD Financials"
+    group_label: "Actuals"
+    type: number
+    value_format_name: usd_0
+    sql: ${total_income_this_month_prior_year}-${total_cos_this_month_prior_year} ;;
+  }
+
+  measure: total_income_budget_this_month {
+    view_label: "Monthly YTD Financials"
+    group_label: "Actuals"
+    hidden: yes
+    type: sum_distinct
+    sql_distinct_key: ${budget.budget_id} ;;
+    sql: ${budget.amount} ;;
+    value_format_name: usd_0
+    filters: [accounts.category: "Income" , is_this_month: "Yes", budget_category.name: "Annual Budget"]
+  }
+
+  measure: total_cos_budget_this_month {
+    view_label: "Monthly YTD Financials"
+    group_label: "Actuals"
+    hidden: yes
+    type: sum_distinct
+    sql_distinct_key: ${budget.budget_id} ;;
+    sql: ${budget.amount} ;;
+    value_format_name: usd_0
+    filters: [accounts.category: "Cost of Sales", is_this_month: "Yes", budget_category.name: "Annual Budget"]
+  }
+
+  measure: budget_gross_profit_this_month {
+    view_label: "Monthly YTD Financials"
+    label: "Selected Month Gross Profit Budget"
+    group_label: "Budget"
+    type: number
+    value_format_name: usd_0
+    sql: ${total_income_budget_this_month}-${total_cos_budget_this_month} ;;
   }
 
 }

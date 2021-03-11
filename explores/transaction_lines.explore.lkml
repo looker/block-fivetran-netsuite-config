@@ -39,8 +39,8 @@ explore: transaction_lines {
     type: full_outer
     sql_on: ${dt_all_accounts_and_accounting_periods.account_id} = ${transaction_lines.account_id}
     AND ${transactions.accounting_period_id} = ${dt_all_accounts_and_accounting_periods.accounting_period_id}
-    AND ${transaction_lines.department_id} = ${dt_all_accounts_and_accounting_periods.department_id}
-    AND ${transaction_lines.company_id} = ${dt_all_accounts_and_accounting_periods.customer_id};;
+    AND ${transaction_lines.department_id} = ${dt_all_accounts_and_accounting_periods.department_id};;
+    # AND ${transaction_lines.company_id} = ${dt_all_accounts_and_accounting_periods.customer_id};;
     relationship: many_to_one
   }
 
@@ -72,7 +72,7 @@ explore: transaction_lines {
   }
   join: customers {
     type: left_outer
-    sql_on: ${dt_all_accounts_and_accounting_periods.customer_id} = ${customers.customer_id}
+    sql_on: ${transaction_lines.company_id} = ${customers.customer_id}
       and not ${customers._fivetran_deleted} ;;
     relationship: many_to_one #TODO AJC needs confirmation
   }
@@ -120,7 +120,7 @@ explore: transaction_lines {
   join: customer_budget {
     from: budget
     type: left_outer
-    sql_on: ${dt_all_accounts_and_accounting_periods.customer_id} = ${customer_budget.customer_id}
+    sql_on: ${transaction_lines.company_id} = ${customer_budget.customer_id}
     and ${dt_all_accounts_and_accounting_periods.accounting_period_id} = ${customer_budget.accounting_period_id}
     and not ${customer_budget._fivetran_deleted};;
     relationship: many_to_one

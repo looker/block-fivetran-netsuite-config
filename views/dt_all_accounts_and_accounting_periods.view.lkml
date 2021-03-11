@@ -1,9 +1,10 @@
 view: dt_all_accounts_and_accounting_periods {
   derived_table: {
-    sql: SELECT account_id, accounting_period_id, department_id
+    sql: SELECT account_id, accounting_period_id, department_id, customer_id
         FROM NETSUITE.ACCOUNTS
         CROSS JOIN NETSUITE.ACCOUNTING_PERIODS
-        CROSS JOIN NETSUITE.DEPARTMENTS;;
+        CROSS JOIN NETSUITE.DEPARTMENTS
+        CROSS JOIN NETSUITE.CUSTOMERS;;
     persist_for: "24 hours"
   }
 
@@ -12,8 +13,7 @@ view: dt_all_accounts_and_accounting_periods {
     hidden: yes
     primary_key: yes
     type: string
-    sql: concat(${account_id}, ${accounting_period_id}) ;;
-    # sql: concat(${account_id}, ${accounting_period_id}, ${customer_id}) ;;
+    sql: concat(${account_id}, ${accounting_period_id}, ${customer_id}, ${department_id}) ;;
   }
 
   dimension: account_id {
@@ -34,12 +34,11 @@ view: dt_all_accounts_and_accounting_periods {
     sql: ${TABLE}."DEPARTMENT_ID" ;;
   }
 
-
-  # dimension: customer_id {
-  #   hidden: no
-  #   type: number
-  #   sql: ${TABLE}."CUSTOMER_ID" ;;
-  # }
+  dimension: customer_id {
+    hidden: no
+    type: number
+    sql: ${TABLE}."CUSTOMER_ID" ;;
+  }
 
 
 }

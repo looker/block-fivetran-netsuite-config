@@ -13,6 +13,7 @@ view: dt_all_accounts_and_accounting_periods {
     primary_key: yes
     type: string
     sql: concat(${account_id}, ${accounting_period_id}) ;;
+    # sql: concat(${account_id}, ${accounting_period_id}, ${customer_id}) ;;
   }
 
   dimension: account_id {

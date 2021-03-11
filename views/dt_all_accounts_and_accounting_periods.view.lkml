@@ -17,19 +17,19 @@ view: dt_all_accounts_and_accounting_periods {
   }
 
   dimension: account_id {
-    hidden: no
+    hidden: yes
     type: number
     sql: ${TABLE}."ACCOUNT_ID" ;;
   }
 
   dimension: accounting_period_id {
-    hidden: no
+    hidden: yes
     type: number
     sql: ${TABLE}."ACCOUNTING_PERIOD_ID" ;;
   }
 
  dimension: department_id {
-    hidden: no
+    hidden: yes
     type: number
     sql: ${TABLE}."DEPARTMENT_ID" ;;
   }

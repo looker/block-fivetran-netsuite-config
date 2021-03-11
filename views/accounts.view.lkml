@@ -196,8 +196,6 @@ view: accounts_netsuite {
 
     sql: case
 
-
-
                 when ${name} = 'Hosting' then 'Operating Expense - COS'
                 when ${name} = 'COS Account Updater Fees' then 'Operating Expense - COS'
                 when ${name} = 'COS Merchant Account Fees' then 'Operating Expense - COS'
@@ -212,18 +210,68 @@ view: accounts_netsuite {
                 when ${name} = 'COS Bonus' then 'Headcount - COS'
                 when ${name} = 'Expense - Ask my Accountant' then 'Operating Expense - COS'
 
+                when ${name} = 'Salary' then 'Headcount Expense'
+                when ${name} = 'Payroll taxes - Employer' then 'Headcount Expense'
+                when ${name} = 'Salary Bonus' then 'Headcount Expense'
+                when ${name} = 'Employee Insurance' then 'Headcount Expense'
+                when ${name} = '401k Employer Match' then 'Headcount Expense'
+                when ${name} = 'Sales Commission' then 'Headcount Expense'
+                when ${name} = 'Online services' then 'Non Headcount Expense'
+                when ${name} = 'Consulting Other' then 'Non Headcount Expense'
+                when ${name} = 'Rent Expense' then 'Non Headcount Expense'
+                when ${name} = 'Recruitment Expense' then 'Non Headcount Expense'
+                when ${name} = 'Business Insurance Expense' then 'Non Headcount Expense'
+                when ${name} = 'Advertising' then 'Non Headcount Expense'
+                when ${name} = 'Legal Expenses' then 'Non Headcount Expense'
+                when ${name} = 'Commission Expense Contra Account' then 'Non Headcount Expense'
+                when ${name} = 'Telephone Expense' then 'Non Headcount Expense'
+                when ${name} = 'Professional Fees' then 'Non Headcount Expense'
+                when ${name} = 'Parking' then 'Non Headcount Expense'
+                when ${name} = 'HR & Payroll Service Fees' then 'Non Headcount Expense'
+                when ${name} = 'Taxes Other' then 'Non Headcount Expense'
+                when ${name} = 'Continuing Education' then 'Non Headcount Expense'
+                when ${name} = 'Rewards/Gifts' then 'Non Headcount Expense'
+                when ${name} = 'Computer and Internet Expenses' then 'Non Headcount Expense'
+                when ${name} = 'Marketing' then 'Non Headcount Expense'
+                when ${name} = 'Postage' then 'Non Headcount Expense'
+                when ${name} = 'Dues and Subscriptions' then 'Non Headcount Expense'
+                when ${name} = 'Workers Comp Ins' then 'Non Headcount Expense'
+                when ${name} = 'Payroll Taxes Contra Account' then 'Non Headcount Expense'
+                when ${name} = 'Meals and Entertainment' then 'Non Headcount Expense'
+                when ${name} = 'Conferences' then 'Non Headcount Expense'
+                when ${name} = 'Office Snacks & Drinks' then 'Non Headcount Expense'
+                when ${name} = 'Office Supplies' then 'Non Headcount Expense'
+                when ${name} = 'Team Meals' then 'Non Headcount Expense'
+                when ${name} = 'Accounting Expense' then 'Non Headcount Expense'
+                when ${name} = 'Office Expense' then 'Non Headcount Expense'
+                when ${name} = 'Bank Service Charges' then 'Non Headcount Expense'
+                when ${name} = 'Automobile Expense' then 'Non Headcount Expense'
+                when ${name} = 'Bad Debt Expense' then 'Non Headcount Expense'
+                when ${name} = 'Business Development Commission' then 'Non Headcount Expense'
+                when ${name} = 'Charitable Contributions - Deductible' then 'Non Headcount Expense'
+                when ${name} = 'Charitable Contributions - Non-Deductible' then 'Non Headcount Expense'
+                when ${name} = 'Cleaning Expense' then 'Non Headcount Expense'
+                when ${name} = 'Event Rentals' then 'Non Headcount Expense'
+                when ${name} = 'Expense - Ask my Accountant' then 'Non Headcount Expense'
+                when ${name} = 'Furniture & Fixtures Expense' then 'Non Headcount Expense'
+                when ${name} = 'Inside Sales Commission' then 'Non Headcount Expense'
+                when ${name} = 'Insurance Expense' then 'Non Headcount Expense'
+                when ${name} = 'Marketing Expense' then 'Non Headcount Expense'
+                when ${name} = 'Property Taxes' then 'Non Headcount Expense'
+                when ${name} = 'Relocation Expense' then 'Non Headcount Expense'
+                when ${name} = 'Severance' then 'Non Headcount Expense'
+                when ${name} = 'Stock Compensation' then 'Non Headcount Expense'
+                when ${name} = 'Swag' then 'Non Headcount Expense'
+                when ${name} = 'Travel Expense' then 'Non Headcount Expense'
+                when ${name} = 'Travel, Meals,and Entertainment' then 'Non Headcount Expense'
+                when ${name} = 'Utilities' then 'Non Headcount Expense'
 
-                       else ''
+
+                      else ''
                           end
                         ;;
   }
 
-                # when ${name} = 'Continuing Education' then 'Operating Expense - COS'
-                # when ${name} = 'Computer and Internet Expenses' then 'Operating Expense - COS'
-
-                # when ${name} = 'Online services' then 'Operating Expense - COS'
-                # when ${name} = 'Conferences' then 'Operating Expense - COS'
-                # when ${name} = 'Employee Insurance' then 'Headcount - COS'
 
 
 

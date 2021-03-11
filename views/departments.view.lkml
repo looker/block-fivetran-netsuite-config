@@ -91,6 +91,38 @@ view: departments {
     sql: ${TABLE}."PARENT_ID" ;;
   }
 
+
+  dimension: parent_department_name {
+
+    sql: case
+
+      when ${name} = 'Engineering' then 'Research & Development'
+      when ${name} = 'Product Development' then 'Research & Development'
+      when ${name} = 'Security & Compliance' then 'Research & Development'
+      when ${name} = 'Systems Engineering' then 'Research & Development'
+      when ${name} = 'Support' then 'Research & Development'
+      when ${name} = 'Business Operations' then 'General and Administrative'
+      when ${name} = 'Human Resources' then 'General and Administrative'
+      when ${name} = 'Finance' then 'General and Administrative'
+      when ${name} = 'Information Technology' then 'General and Administrative'
+      when ${name} = 'Marketing' then 'Sales & Marketing'
+      when ${name} = 'Enterprise' then 'Sales & Marketing'
+      when ${name} = 'Professional Service' then 'Sales & Marketing'
+      when ${name} = 'Business Development' then 'Sales & Marketing'
+      when ${name} = 'Customer Success' then 'Sales & Marketing'
+      when ${name} = 'Paymentsfn' then 'Sales & Marketing'
+
+                             else ''
+                                end
+                              ;;
+  }
+
+
+
+
+
+
+
   measure: count {
     type: count
     drill_fields: [department_id, full_name, name, items.count]

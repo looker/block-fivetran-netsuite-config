@@ -95,16 +95,19 @@ view: departments {
   dimension: parent_department_name {
 
     sql: case
-
+      when ${name} = 'Research & Development' then 'Research & Development'
       when ${name} = 'Engineering' then 'Research & Development'
       when ${name} = 'Product Development' then 'Research & Development'
       when ${name} = 'Security & Compliance' then 'Research & Development'
       when ${name} = 'Systems Engineering' then 'Research & Development'
+      when ${name} = 'Operations' then 'Research & Development'
       when ${name} = 'Support' then 'Research & Development'
-      when ${name} = 'Business Operations' then 'General and Administrative'
-      when ${name} = 'Human Resources' then 'General and Administrative'
-      when ${name} = 'Finance' then 'General and Administrative'
-      when ${name} = 'Information Technology' then 'General and Administrative'
+      when ${name} = 'General & Administration' then 'General & Administration'
+      when ${name} = 'Business Operations' then 'General & Administration'
+      when ${name} = 'Human Resources' then 'General & Administration'
+      when ${name} = 'Finance' then 'General & Administration'
+      when ${name} = 'Information Technology' then 'General & Administration'
+      when ${name} = 'Sales & Marketing' then 'Sales & Marketing'
       when ${name} = 'Marketing' then 'Sales & Marketing'
       when ${name} = 'Enterprise' then 'Sales & Marketing'
       when ${name} = 'Professional Service' then 'Sales & Marketing'
@@ -116,8 +119,6 @@ view: departments {
                                 end
                               ;;
   }
-
-
 
 
 

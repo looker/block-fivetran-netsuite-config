@@ -123,7 +123,7 @@ explore: transaction_lines {
     sql_on: ${transaction_lines.company_id} = ${customer_budget.customer_id}
     and ${dt_all_accounts_and_accounting_periods.accounting_period_id} = ${customer_budget.accounting_period_id}
     and not ${customer_budget._fivetran_deleted};;
-    relationship: many_to_one
+    relationship: many_to_many
   }
 
   join: budget {

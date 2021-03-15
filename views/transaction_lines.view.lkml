@@ -986,108 +986,10 @@ view: transaction_lines {
     drill_fields: [detail*]
   }
 
-  measure: total_income_this_month{
-    type: sum
-    value_format_name: usd
-    sql: ${transaction_amount} ;;
-    filters: [accounts.type_name: "Income" , is_this_month: "Yes"]
-
-  }
-
-  measure: total_cos_this_month{
-    type: sum
-    value_format_name: usd
-    sql: ${transaction_amount} ;;
-    filters: [accounts.type_name: "Cost of Goods Sold", is_this_month: "Yes"]
-
-
-  }
-
-
-  measure: gross_profit_this_month{
-    type: number
-    value_format_name: usd_0
-    sql: ${total_income_this_month}-${total_cos_this_month} ;;
-  }
-
-
   measure: Budget_Variance {
     type: number
     value_format_name: usd
     sql: ${sum_transaction_amount}-${budget.sum_amount} ;;
-  }
-
-
-
-  parameter: selector_date  {
-    type: date
-  }
-
-  dimension: is_this_month {
-    type: yesno
-    sql: EXTRACT(MONTH FROM ${accounting_periods.ending_raw}) = EXTRACT(MONTH from {% parameter selector_date %})
-    AND EXTRACT(YEAR FROM ${accounting_periods.ending_raw}) = EXTRACT(YEAR from {% parameter selector_date %});;
-  }
-
-  dimension: is_this_month_prior_year {
-    type: yesno
-    sql: EXTRACT(MONTH FROM ${accounting_periods.ending_raw}) = EXTRACT(MONTH from {% parameter selector_date %})
-      AND EXTRACT(YEAR FROM ${accounting_periods.ending_raw})+1 = EXTRACT(YEAR from {% parameter selector_date %});;
-  }
-
-  measure: sum_transaction_amount_this_month {
-    label: "Selected Month Actual"
-    type: sum
-    value_format_name: usd_0
-    sql: ${transaction_amount} ;;
-    filters: [is_this_month: "Yes"]
-    drill_fields: [detail*]
-  }
-
-  measure: sum_transaction_amount_this_month_prior_year {
-    label: "Prior Year Actual"
-    type: sum
-    value_format_name: usd_0
-    sql: ${transaction_amount} ;;
-    filters: [is_this_month_prior_year: "Yes"]
-    drill_fields: [detail*]
-  }
-
-  measure: budget_sum_amount_this_month {
-    label: "Selected Month Plan"
-    type: sum_distinct
-    sql_distinct_key: ${budget.budget_id} ;;
-    value_format_name: usd_0
-    sql: ${budget.amount} ;;
-    filters: [is_this_month: "Yes", budget_category.name: "Annual Budget"]
-  }
-
-  measure: budget_variance {
-    label: "Variance to Plan ($ Change)"
-    type: number
-    value_format_name: usd_0
-    sql: ${sum_transaction_amount_this_month} - ${budget_sum_amount_this_month} ;;
-  }
-
-  measure: budget_variance_pct {
-    label: "Variance to Plan (%)"
-    type: number
-    value_format_name: percent_0
-    sql: ${budget_variance} / NULLIF(${budget_sum_amount_this_month},0) ;;
-  }
-
-  measure: yoy_variance {
-    label: "YoY Growth ($ Change)"
-    type: number
-    value_format_name: usd_0
-    sql: ${sum_transaction_amount_this_month} - ${sum_transaction_amount_this_month_prior_year} ;;
-  }
-
-  measure: yoy_variance_pct {
-    label: "YoY Growth (%)"
-    type: number
-    value_format_name: percent_0
-    sql: ${yoy_variance} / NULLIF(${sum_transaction_amount_this_month_prior_year},0) ;;
   }
 
 # measure: total_revenue {

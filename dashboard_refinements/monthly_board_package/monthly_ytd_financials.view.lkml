@@ -243,7 +243,7 @@ view: +transaction_lines {
     sql: ${gross_profit_this_month} - ${gross_profit_this_month_prior_year} ;;
   }
 
-  measure: yoy_variance_pct {
+  measure: gross_profit_yoy_variance_pct {
     view_label: "Monthly YTD Financials"
     label: "Gross Profit YoY Growth (%)"
     group_label: "Variance"

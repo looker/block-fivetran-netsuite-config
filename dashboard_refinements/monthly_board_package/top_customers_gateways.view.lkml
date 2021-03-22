@@ -33,10 +33,10 @@ view: +transaction_lines {
     label: "YTD Plan through Recent EOM"
     group_label: "Budget"
     type: sum_distinct
-    sql_distinct_key: ${budget.budget_id} ;;
+    sql_distinct_key: ${customer_budget.budget_id} ;;
     value_format_name: usd_0
-    sql: ${budget.amount} ;;
-    filters: [is_ytd_through_eom: "Yes", budget_category.name: "Annual Budget"]
+    sql: ${customer_budget.amount} ;;
+    filters: [is_ytd_through_eom: "Yes", customer_budget.category_id: "3"]
   }
 
   measure: sum_transaction_amount_ytd_through_eom_last_year {

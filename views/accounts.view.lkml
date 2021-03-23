@@ -196,21 +196,23 @@ view: accounts_netsuite {
 
     sql: case
 
+                when ${name} = 'COS Variable Compensation' then 'Headcount - COS'
+                when ${name} = 'COS EE Insurance' then 'Headcount - COS'
+                when ${name} = 'COS Salary' then 'Headcount - COS'
+                when ${name} = 'COS Payroll Taxes' then 'Headcount - COS'
+                when ${name} = 'COS Bonus' then 'Headcount - COS'
+                when ${name} = '401k Employer Match' then 'Headcount - COS'
+                when ${name} = 'COS Phone Bills' then 'Headcount - COS'
+
                 when ${name} = 'Hosting' then 'Operating Expense - COS'
                 when ${name} = 'COS Account Updater Fees' then 'Operating Expense - COS'
                 when ${name} = 'COS Merchant Account Fees' then 'Operating Expense - COS'
                 when ${name} = 'COS Consulting' then 'Operating Expense - COS'
                 when ${name} = 'COS Online Services' then 'Operating Expense - COS'
                 when ${name} = 'COS PCI' then 'Operating Expense - COS'
-                when ${name} = 'COS Phone Bills' then 'Operating Expense - COS'
-                when ${name} = 'COS Salary' then 'Headcount - COS'
-                when ${name} = 'COS EE Insurance' then 'Headcount - COS'
-                when ${name} = 'COS Payroll Taxes' then 'Headcount - COS'
-                when ${name} = 'COS Variable Compensation' then 'Headcount - COS'
-                when ${name} = 'COS Bonus' then 'Headcount - COS'
                 when ${name} = 'Expense - Ask my Accountant' then 'Operating Expense - COS'
                 when ${name} = 'Online services' then 'Operating Expense - COS'
-                when ${name} = '401k Employer Match' then 'Headcount - COS'
+
                 when ${name} = 'Continuing Education' then 'Operating Expense - COS'
                 when ${name} = 'Conferences' then 'Operating Expense - COS'
                       else ''

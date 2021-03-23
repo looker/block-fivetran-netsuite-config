@@ -223,6 +223,27 @@ explore: +transaction_lines {
 
 }
 
+explore: +transaction_lines {
+  join: top_customers_by_subscription_and_usage {
+    type: left_outer
+    sql_on: ${transaction_lines.company_id} = ${top_customers_by_subscription_and_usage.customer_id} ;;
+    relationship: many_to_one
+  }
+
+  join: top_customers_by_all_revenue {
+    type: left_outer
+    sql_on: ${transaction_lines.company_id} = ${top_customers_by_all_revenue.customer_id} ;;
+    relationship: many_to_one
+  }
+
+  join: top_gateways {
+    type: left_outer
+    sql_on: ${transaction_lines.company_id} = ${top_gateways.customer_id} ;;
+    relationship: many_to_one
+  }
+}
+
+
 # Place in `netsuite_spreedly` model
 # Place in `netsuite_spreedly` model
 explore: +transaction_lines {

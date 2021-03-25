@@ -216,6 +216,8 @@ view: accounts_netsuite {
                 when ${name} = 'Online services' then 'Operating Expense - COS'
                 when ${name} = 'Continuing Education' then 'Operating Expense - COS'
                 when ${name} = 'Conferences' then 'Operating Expense - COS'
+                when ${name} = 'Computer and Internet Expenses' then 'Operating Expense - COS'
+
                       else ''
                           end
                         ;;

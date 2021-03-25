@@ -131,7 +131,7 @@ view: +transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_lines.transaction_amount} ;;
-    filters: [accounts.opex_name_group: "Headcount Expense, Non Headcount Expense", is_this_month: "Yes"]
+    filters: [accounts.category: "Headcount Expenses, Operating Expenses", is_this_month: "Yes"]
   }
 
   measure: gross_profit_this_month{
@@ -166,7 +166,7 @@ view: +transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_lines.transaction_amount} ;;
-    filters: [accounts.opex_name_group: "Headcount Expense, Non Headcount Expense", is_this_month_prior_year: "Yes"]
+    filters: [accounts.category: "Headcount Expenses, Operating Expenses", is_this_month_prior_year: "Yes"]
   }
 
   measure: gross_profit_this_month_prior_year{
@@ -204,7 +204,7 @@ view: +transaction_lines {
     sql_distinct_key: ${budget.budget_id} ;;
     sql: ${budget.amount} ;;
     value_format_name: usd_0
-    filters: [accounts.opex_name_group: "Headcount Expense, Non Headcount Expense", is_this_month: "Yes", budget_category.name: "Annual Budget"]
+    filters: [accounts.category: "Headcount Expenses, Operating Expenses", is_this_month: "Yes", budget_category.name: "Annual Budget"]
   }
 
   measure: budget_gross_profit_this_month {
@@ -353,7 +353,7 @@ view: +transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_lines.transaction_amount} ;;
-    filters: [accounts.opex_name_group: "Headcount Expense, Non Headcount Expense", is_this_month_ytd: "Yes"]
+    filters: [accounts.category: "Headcount Expenses, Operating Expenses", is_this_month_ytd: "Yes"]
   }
 
   measure: gross_profit_this_month_ytd {
@@ -392,7 +392,7 @@ view: +transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_lines.transaction_amount} ;;
-    filters: [accounts.opex_name_group: "Headcount Expense, Non Headcount Expense", is_this_month_prior_year_ytd: "Yes"]
+    filters: [accounts.category: "Headcount Expenses, Operating Expenses", is_this_month_prior_year_ytd: "Yes"]
   }
 
   measure: gross_profit_this_month_prior_year_ytd{
@@ -434,7 +434,7 @@ view: +transaction_lines {
     sql_distinct_key: ${budget.budget_id} ;;
     sql: ${budget.amount} ;;
     value_format_name: usd_0
-    filters: [accounts.opex_name_group: "Headcount Expense, Non Headcount Expense", is_this_month_ytd: "Yes", budget_category.name: "Annual Budget"]
+    filters: [accounts.category: "Headcount Expenses, Operating Expenses", is_this_month_ytd: "Yes", budget_category.name: "Annual Budget"]
   }
 
   measure: budget_gross_profit_this_month_ytd {

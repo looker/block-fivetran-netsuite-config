@@ -107,7 +107,7 @@ view: top_customers_by_subscription_and_usage {
       }
       filters: {
         field: budget_category.name
-        value: "Annual Budget"
+        value: "Annual Budget,null"
       }
       filters: {
         field: income_accounts.name

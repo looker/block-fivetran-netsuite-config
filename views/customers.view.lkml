@@ -856,6 +856,44 @@ view: customers {
     sql: ${TABLE}."NAME" ;;
   }
 
+
+  dimension_group: parent_name {
+
+    sql: case
+           when ${name} = 'Authorize.net' then 'Authorize.net'
+          when ${name} = 'Stripe Rev Share' then 'Stripe Rev Share'
+          when ${name} = 'Braintree' then 'Paypal'
+          when ${name} = 'Elavon' then 'Elavon'
+          when ${name} = 'Worldpay (UK) Limited' then 'Worldpay (UK) Limited'
+          when ${name} = 'PayU Colombia S.A.S.' then 'PayU Colombia S.A.S.'
+          when ${name} = 'Mercado Pago' then 'Mercado Pago'
+          when ${name} = 'CardConnect, LLC' then 'CardConnect, LLC'
+          when ${name} = 'Paymentez, LLC' then 'Paymentez, LLC'
+          when ${name} = 'SafeCharge Limited' then 'SafeCharge Limited'
+          when ${name} = 'PayPal Express Checkout' then 'Paypal'
+          when ${name} = 'CASPI Ltd.' then 'CASPI Ltd.'
+          when ${name} = 'BlueSnap, Inc.' then 'BlueSnap, Inc.'
+          when ${name} = 'PayPal Payments Pro' then 'Paypal'
+          when ${name} = 'DLocal LLP' then 'DLocal LLP'
+          when ${name} = 'Monei Digital Payments SL' then 'Monei Digital Payments SL'
+          when ${name} = 'ProPay' then 'ProPay'
+          when ${name} = 'Ebanx' then 'Ebanx'
+          when ${name} = 'Mercadotecnia Ideas y Tecnolog√≠a S.A. de C.V. (Mitec)' then 'Mercadotecnia Ideas y Tecnolog√≠a S.A. de C.V. (Mitec)'
+
+                           else ''
+                                end
+                              ;;
+  }
+
+
+
+
+
+
+
+
+
+
   dimension: no__of_employees {
     type: number
     sql: ${TABLE}."NO__OF_EMPLOYEES" ;;

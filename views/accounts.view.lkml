@@ -227,6 +227,8 @@ view: accounts_netsuite {
   dimension: opex_name_group {
 
     sql: case
+
+                      when ${name} = 'Commission Expense Contra Account' then 'Headcount Expense'
                       when ${name} = 'Salary' then 'Headcount Expense'
                       when ${name} = 'Payroll taxes - Employer' then 'Headcount Expense'
                       when ${name} = 'Salary Bonus' then 'Headcount Expense'
@@ -240,7 +242,7 @@ view: accounts_netsuite {
                       when ${name} = 'Business Insurance Expense' then 'Non Headcount Expense'
                       when ${name} = 'Advertising' then 'Non Headcount Expense'
                       when ${name} = 'Legal Expenses' then 'Non Headcount Expense'
-                      when ${name} = 'Commission Expense Contra Account' then 'Non Headcount Expense'
+
                       when ${name} = 'Telephone Expense' then 'Headcount Expense'
                       when ${name} = 'Professional Fees' then 'Non Headcount Expense'
                       when ${name} = 'Parking' then 'Non Headcount Expense'

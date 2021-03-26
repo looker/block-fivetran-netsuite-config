@@ -122,7 +122,7 @@ view: +transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_lines.transaction_amount} ;;
-    filters: [accounts.category: "Cost of Sales", is_this_month: "Yes"]
+    filters: [accounts.category: "Cost of Sales", is_this_month: "Yes", transaction_lines.is_transaction_non_posting: "NO"]
   }
 
   measure: total_expenses_this_month{
@@ -157,7 +157,7 @@ view: +transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_lines.transaction_amount} ;;
-    filters: [accounts.category: "Cost of Sales", is_this_month_prior_year: "Yes"]
+    filters: [accounts.category: "Cost of Sales", is_this_month_prior_year: "Yes", transaction_lines.is_transaction_non_posting: "NO"]
   }
 
   measure: total_expenses_this_month_prior_year{
@@ -194,7 +194,7 @@ view: +transaction_lines {
     sql_distinct_key: ${budget.budget_id} ;;
     sql: ${budget.amount} ;;
     value_format_name: usd_0
-    filters: [accounts.category: "Cost of Sales", is_this_month: "Yes", budget_category.name: "Annual Budget"]
+    filters: [accounts.category: "Cost of Sales", is_this_month: "Yes", budget_category.name: "Annual Budget", transaction_lines.is_transaction_non_posting: "NO"]
   }
 
   measure: total_expenses_budget_this_month {
@@ -264,7 +264,7 @@ view: +transaction_lines {
     type: sum
     value_format_name: usd_0
     sql: ${transaction_lines.transaction_amount} ;;
-    filters: [is_this_month_ytd: "Yes"]
+    filters: [is_this_month_ytd: "Yes", transaction_lines.is_transaction_non_posting: "NO"]
     drill_fields: [transaction_lines..detail*]
   }
 
@@ -343,7 +343,7 @@ view: +transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_lines.transaction_amount} ;;
-    filters: [accounts.category: "Cost of Sales", is_this_month_ytd: "Yes"]
+    filters: [accounts.category: "Cost of Sales", is_this_month_ytd: "Yes", transaction_lines.is_transaction_non_posting: "NO"]
   }
 
   measure: total_expenses_this_month_ytd {
@@ -382,7 +382,7 @@ view: +transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_lines.transaction_amount} ;;
-    filters: [accounts.category: "Cost of Sales", is_this_month_prior_year_ytd: "Yes"]
+    filters: [accounts.category: "Cost of Sales", is_this_month_prior_year_ytd: "Yes", transaction_lines.is_transaction_non_posting: "NO"]
   }
 
   measure: total_expenses_this_month_prior_year_ytd{
@@ -423,7 +423,7 @@ view: +transaction_lines {
     sql_distinct_key: ${budget.budget_id} ;;
     sql: ${budget.amount} ;;
     value_format_name: usd_0
-    filters: [accounts.category: "Cost of Sales", is_this_month_ytd: "Yes", budget_category.name: "Annual Budget"]
+    filters: [accounts.category: "Cost of Sales", is_this_month_ytd: "Yes", budget_category.name: "Annual Budget", transaction_lines.is_transaction_non_posting: "NO"]
   }
 
   measure: total_expenses_budget_this_month_ytd {

@@ -217,8 +217,16 @@ view: accounts_netsuite {
                 when ${name} = 'Continuing Education' then 'Operating Expense - COS'
                 when ${name} = 'Conferences' then 'Operating Expense - COS'
                 when ${name} = 'Computer and Internet Expenses' then 'Operating Expense - COS'
+                when ${name} = 'Parking' then 'Operating Expense - COS'
+                when ${name} = 'Recruitment Expense' then 'Operating Expense - COS'
+                when ${name} = 'Loss on Disposal of Asset' then 'Operating Expense - COS'
+                when ${name} = 'Depreciation Expense' then 'Operating Expense - COS'
+                when ${name} = 'Team Meals' then 'Operating Expense - COS'
+                when ${name} = 'Travel Expense' then 'Operating Expense - COS'
+                when ${name} = 'Meals and Entertainment' then 'Operating Expense - COS'
 
-                      else ''
+
+                     else ''
                           end
                         ;;
   }

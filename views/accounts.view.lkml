@@ -258,6 +258,9 @@ view: accounts_netsuite {
                       when ${name} = 'Advertising' then 'Non Headcount Expense'
                       when ${name} = 'Legal Expenses' then 'Non Headcount Expense'
 
+
+
+                      when ${name} = 'Consulting Other' then 'Headcount Expense'
                       when ${name} = 'Telephone Expense' then 'Headcount Expense'
                       when ${name} = 'Professional Fees' then 'Non Headcount Expense'
                       when ${name} = 'Parking' then 'Non Headcount Expense'

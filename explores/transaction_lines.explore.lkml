@@ -6,10 +6,10 @@ include: "/customer_daily_income_transaction_details_summary.view"
 include: "//spreedly/salesforce/views/account.view"
 include: "/dashboard_refinements/**/*view"
 
-
+# fields: [ALL_FIELDS*, -transactions_spreedly.is_production_transaction, -transactions_spreedly.count_test_transactions, -transactions_spreedly.count_production_transactions]
 # Suggested filters/ Alwasys filter default yes -  for income transaction details:Account type: Income/Other income,Non posting: No
 
-explore: transaction_lines {
+explore: transaction_lines { fields: [ALL_FIELDS*, -transactions_spreedly.is_production_transaction, -transactions_spreedly.count_test_transactions, -transactions_spreedly.count_production_transactions]
   view_name: transaction_lines
   sql_always_where:
    (${accounting_periods.fiscal_calendar_id} is null
@@ -220,6 +220,11 @@ explore: +transaction_lines {
     relationship: many_to_one
   }
 
+# join: customer_activity {
+#   type: left_outer
+#   sql_on: ${transactions_spreedly.key} = ${customer_activity.transaction_token};;
+# relationship: many_to_one
+# }
 
 }
 

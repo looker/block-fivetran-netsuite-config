@@ -205,12 +205,18 @@ view: accounts_netsuite {
                 when ${name} = 'COS Phone Bills' then 'Headcount - COS'
                 when ${name} = 'Employee Insurance' then 'Headcount - COS'
 
+
                 when ${name} = 'Hosting' then 'Operating Expense - COS'
                 when ${name} = 'COS Account Updater Fees' then 'Operating Expense - COS'
                 when ${name} = 'COS Merchant Account Fees' then 'Operating Expense - COS'
                 when ${name} = 'COS Consulting' then 'Operating Expense - COS'
                 when ${name} = 'COS Online Services' then 'Operating Expense - COS'
                 when ${name} = 'COS PCI' then 'Operating Expense - COS'
+                when ${name} = 'COS Computer Fees' then 'Operating Expense - COS'
+                when ${name} = 'COS HSA Employer Match' then 'Operating Expense - COS'
+                when ${name} = 'COS 401k Employer Match' then 'Operating Expense - COS'
+                when ${name} = 'COS Meals' then 'Operating Expense - COS'
+                when ${name} = 'COS Training / Conferences' then 'Operating Expense - COS'
                 when ${name} = 'Expense - Ask my Accountant' then 'Operating Expense - COS'
 
                 when ${name} = 'Online services' then 'Operating Expense - COS'
@@ -231,6 +237,7 @@ view: accounts_netsuite {
                         ;;
   }
 
+# when ${name} = 'COS HSA Employer Match' then 'Headcount - COS'
 
   dimension: opex_name_group {
 

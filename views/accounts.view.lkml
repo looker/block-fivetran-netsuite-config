@@ -311,20 +311,20 @@ view: accounts_netsuite {
   }
 
 
-  dimension: parent_account_ps{
-    type: string
-    sql: IFF(${parent_account.name} is null AND ${accounts.name} = 'Professional Services - Income', 'Professional Services - Income' ,${parent_account.name}) ;;
-  }
-
-  dimension: parent_account_name {
-    type: string
-    sql: coalesce(${parent_account_ps},${accounts.name}) ;;
-  }
+  # dimension: parent_account_ps{
+  #   type: string
+  #   sql: IFF(${parent_account.name} is null AND ${accounts.name} = 'Professional Services - Income', 'Professional Services - Income' ,${parent_account.name}) ;;
+  # }
 
   # dimension: parent_account_name {
   #   type: string
-  #   sql: coalesce(${parent_account.name},${accounts.name}) ;;
+  #   sql: coalesce(${parent_account_ps},${accounts.name}) ;;
   # }
+
+  dimension: parent_account_name {
+    type: string
+    sql: coalesce(${parent_account.name},${accounts.name}) ;;
+  }
 
 # Can we instead try:
 # IF(${parent_account.name} is NULL AND ${accounts.name} = "Professional Services"

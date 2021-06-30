@@ -310,10 +310,35 @@ view: accounts_netsuite {
                               ;;
   }
 
+
+  dimension: parent_account_ps{
+    type: string
+    sql: IFF(${parent_account.name} is null AND ${accounts.name} = 'Professional Services - Income', 'Professional Services - Income' ,${parent_account.name}) ;;
+  }
+
   dimension: parent_account_name {
     type: string
-    sql: coalesce(${parent_account.name},${accounts.name}) ;;
+    sql: coalesce(${parent_account_ps},${accounts.name}) ;;
   }
+
+  # dimension: parent_account_name {
+  #   type: string
+  #   sql: coalesce(${parent_account.name},${accounts.name}) ;;
+  # }
+
+# Can we instead try:
+# IF(${parent_account.name} is NULL AND ${accounts.name} = "Professional Services"
+# , "professional services", ${parent_account.name})
+
+
+# Professional Services - Income
+# So I'm thinking we can start by first changing the sql for the "${parent_account.name}"
+# field (or create another field that references the ${parent_account.name}).
+# If we're creating that other field, we can write something like IF(${parent_account.name} is NULL, "professional services", ${parent_account.name})
+# -- may need to change a bit for your dialect
+
+
+
 
   dimension: category {
     label: "Financial Line Category"

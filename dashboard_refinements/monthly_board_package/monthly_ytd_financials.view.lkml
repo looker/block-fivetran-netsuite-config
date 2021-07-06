@@ -116,8 +116,7 @@ view: +transaction_lines {
     filters: [accounts.category: "Income" , is_this_month: "Yes",transaction_lines.is_transaction_non_posting: "No" ]
   }
 
-# lower(${non_posting_line})='yes'
-# transaction_lines.is_transaction_non_posting
+
 
   measure: total_cos_this_month{
     view_label: "Monthly YTD Financials"
@@ -151,7 +150,7 @@ view: +transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_lines.transaction_amount} ;;
-    filters: [accounts.category: "Income" , is_this_month_prior_year: "Yes"]
+    filters: [accounts.category: "Income" , is_this_month_prior_year: "Yes",transaction_lines.is_transaction_non_posting: "No"]
   }
 
   measure: total_cos_this_month_prior_year{
@@ -169,7 +168,7 @@ view: +transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_lines.transaction_amount} ;;
-    filters: [accounts.category: "Headcount Expenses, Operating Expenses", is_this_month_prior_year: "Yes"]
+    filters: [accounts.category: "Headcount Expenses, Operating Expenses", is_this_month_prior_year: "Yes",transaction_lines.is_transaction_non_posting: "No"]
   }
 
   measure: gross_profit_this_month_prior_year{
@@ -336,7 +335,7 @@ view: +transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_lines.transaction_amount} ;;
-    filters: [accounts.category: "Income" , is_this_month_ytd: "Yes"]
+    filters: [accounts.category: "Income" , is_this_month_ytd: "Yes",transaction_lines.is_transaction_non_posting: "No"]
   }
 
   measure: total_cos_this_month_ytd {
@@ -375,7 +374,7 @@ view: +transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_lines.transaction_amount} ;;
-    filters: [accounts.category: "Income" , is_this_month_prior_year_ytd: "Yes"]
+    filters: [accounts.category: "Income" , is_this_month_prior_year_ytd: "Yes",transaction_lines.is_transaction_non_posting: "No"]
   }
 
   measure: total_cos_this_month_prior_year_ytd{
@@ -395,7 +394,7 @@ view: +transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_lines.transaction_amount} ;;
-    filters: [accounts.category: "Headcount Expenses, Operating Expenses", is_this_month_prior_year_ytd: "Yes"]
+    filters: [accounts.category: "Headcount Expenses, Operating Expenses", is_this_month_prior_year_ytd: "Yes",transaction_lines.is_transaction_non_posting: "No"]
   }
 
   measure: gross_profit_this_month_prior_year_ytd{

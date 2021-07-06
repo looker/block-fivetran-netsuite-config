@@ -113,8 +113,11 @@ view: +transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_lines.transaction_amount} ;;
-    filters: [accounts.category: "Income" , is_this_month: "Yes"]
+    filters: [accounts.category: "Income" , is_this_month: "Yes",transaction_lines.is_transaction_non_posting: "No" ]
   }
+
+# lower(${non_posting_line})='yes'
+# transaction_lines.is_transaction_non_posting
 
   measure: total_cos_this_month{
     view_label: "Monthly YTD Financials"

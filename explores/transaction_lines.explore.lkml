@@ -220,6 +220,19 @@ explore: +transaction_lines {
     relationship: many_to_one
   }
 
+join: account_salesforce {
+  type: left_outer
+  sql_on: ${organizations.key} = ${account_salesforce.billing_org_id_c} ;;
+  relationship: many_to_one
+}
+
+  join: user_salesforce{
+    type: left_outer
+    sql_on: ${account_salesforce.owner_id} = ${user_salesforce.id} ;;
+    relationship: many_to_one
+  }
+
+
 # join: customer_activity {
 #   type: left_outer
 #   sql_on: ${transactions_spreedly.key} = ${customer_activity.transaction_token};;

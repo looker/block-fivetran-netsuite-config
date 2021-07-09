@@ -239,6 +239,7 @@ view: transaction_lines {
     sql: CAST(${TABLE}."DATE_CREATED" AS TIMESTAMP_NTZ) ;;
   }
 
+
   dimension_group: date_deleted {
     type: time
     timeframes: [
@@ -991,6 +992,12 @@ view: transaction_lines {
     value_format_name: usd
     sql: ${sum_transaction_amount}-${budget.sum_amount} ;;
   }
+
+measure: min_create_date {
+  type: date
+  sql: min(${date_created_raw}) ;;
+}
+
 
 # measure: total_revenue {
 #   type: number

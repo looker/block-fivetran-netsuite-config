@@ -12,7 +12,7 @@ view: customer_cohorts_facts {
       type: number
     }
     dimension: min_create_date {
-      type: number
+      type: date
     }
 
     dimension_group: customer_age {

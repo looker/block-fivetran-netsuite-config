@@ -143,6 +143,13 @@ explore: transaction_lines { fields: [ALL_FIELDS*, -transactions_spreedly.is_pro
     relationship: many_to_one
   }
 
+  join: customer_cohorts_facts {
+    type: left_outer
+    sql_on: ${transaction_lines.company_id} = ${customer_cohorts_facts.customer_id}
+      and not ${customers._fivetran_deleted} ;;
+    relationship: one_to_one
+  }
+
 
 }
 

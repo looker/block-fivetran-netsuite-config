@@ -19,6 +19,6 @@ view: customer_cohorts_facts {
       type: duration
       intervals: [month]
       sql_start: ${min_create_date} ;;
-      sql_end: ${transaction_lines.created_raw} ;;
+      sql_end: ${transaction_lines.date_created_raw} ;;
     }
   }

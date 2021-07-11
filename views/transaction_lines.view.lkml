@@ -993,11 +993,15 @@ view: transaction_lines {
     sql: ${sum_transaction_amount}-${budget.sum_amount} ;;
   }
 
-measure: min_create_date {
+measure: first_transaction_date {
   type: date
   sql: min(${date_created_raw}) ;;
 }
 
+  measure: first_transaction_month {
+    type: date
+    sql: min(${date_created_month}) ;;
+  }
 
 # measure: total_revenue {
 #   type: number

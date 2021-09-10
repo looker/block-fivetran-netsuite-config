@@ -130,6 +130,33 @@ explore: monthly_org_partner_gateway_transactions {
 #   # }
 # }
 
+
+
+# explore: organizations {
+#   join: customer_activity {
+#   type: left_outer
+#   sql_on: ${organizations.key}=${customer_activity.environment_key};;
+#   relationship: many_to_one
+#   }
+#   join: account_salesforce {
+#     type: left_outer
+#     sql_on: ${organizations.key}= ${account_salesforce.billing_org_id_c};;
+#     relationship: one_to_one
+#   }
+# }
+# explore: chrgfyng_chargify_invoice_line_item_c {
+#   join: chrgfyng_chargify_invoice_c {
+#     type: left_outer
+#     sql_on: ${chrgfyng_chargify_invoice_c.chrgfyng_chargify_id_c} = ${chrgfyng_chargify_invoice_line_item_c.chrgfyng_chargify_invoice_id_c}  ;;
+#     relationship: many_to_one
+#   }
+# }
+
+
+
+
+
+
 # explore: balance_sheet {
 #   extends: [balance_sheet_core]
 # }

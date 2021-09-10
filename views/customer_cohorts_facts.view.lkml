@@ -11,14 +11,17 @@ view: customer_cohorts_facts {
     dimension: customer_id {
       type: number
     }
-    dimension: min_create_date {
-      type: number
-    }
+
+  dimension_group: min_create_date {
+    label: "Min Create"
+    type: time
+    timeframes: [date, week, month]
+  }
 
     dimension_group: customer_age {
       type: duration
       intervals: [month]
-      sql_start: ${min_create_date} ;;
+      sql_start: ${min_create_date_date} ;;
       sql_end: ${transaction_lines.date_created_raw} ;;
     }
   }

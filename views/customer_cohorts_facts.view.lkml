@@ -18,6 +18,13 @@ view: customer_cohorts_facts {
       type: number
     }
 
+
+  dimension_group: min_create_date {
+    label: "Min Create"
+    type: time
+    timeframes: [date, week, month]
+  }
+
     dimension: first_transaction_date {
       type: date_raw
     }
@@ -31,6 +38,9 @@ view: customer_cohorts_facts {
     sql: ${first_transaction_date} ;;
   }
 
+# sql_start: ${min_create_date_date} ;;
+# Merge conflict'master' of git@github.com:ajcrutch/block-fivetran-netsuite-config_spreedly.git
+# sql_start: ${min_create_date_date} ;;
 
     dimension_group: customer_age {
       type: duration
@@ -39,6 +49,8 @@ view: customer_cohorts_facts {
       sql_end: ${transaction_lines.date_created_raw} ;;
     }
   }
+
+# sql_start: ${min_create_date_date} ;;
 
 # Step 1: create the min create date for cohort
 #   measure: min_create_date {

@@ -108,6 +108,7 @@ view: accounting_periods {
       date,
       week,
       month,
+      month_name,
       quarter,
       quarter_of_year,
       year

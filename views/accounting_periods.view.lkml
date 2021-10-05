@@ -109,6 +109,7 @@ view: accounting_periods {
       week,
       month,
       quarter,
+      quarter_of_year,
       year
     ]
     sql: CAST(${TABLE}."ENDING" AS TIMESTAMP_NTZ) ;;

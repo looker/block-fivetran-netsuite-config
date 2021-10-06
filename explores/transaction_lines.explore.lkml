@@ -177,11 +177,18 @@ explore: +transaction_lines {
   }
 
 #netsuite transactions are called "Transactions" Spreedly is called transactions_Spreedly view was renamed
+  join: account_salesforce {
+    type: left_outer
+    sql_on: ${customers.chargify_customer_id} = ${account_salesforce.chrgfyng_chargify_customer_id_c} ;;
+    relationship: one_to_one
+  }
+
+
   join: organizations {
     type: left_outer
     view_label: "Spreedly Organizations"
-    sql_on: ${customers.spreedly_billing_id}=${organizations.key} ;;
-    relationship: many_to_one
+    sql_on: ${account_salesforce.billing_org_id_c}=${organizations.key} ;;
+    relationship: one_to_one
   }
 
   join: accounts_spreedly {

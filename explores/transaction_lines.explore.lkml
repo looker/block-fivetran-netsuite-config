@@ -5,11 +5,12 @@ include: "//spreedly/heroku_kafka/views/*.view"
 include: "/customer_daily_income_transaction_details_summary.view"
 include: "//spreedly/salesforce/views/account.view"
 include: "/dashboard_refinements/**/*view"
+include: "//spreedly/heroku_kafka/views/transactions.view.lkml"
 
 # fields: [ALL_FIELDS*, -transactions_spreedly.is_production_transaction, -transactions_spreedly.count_test_transactions, -transactions_spreedly.count_production_transactions]
 # Suggested filters/ Alwasys filter default yes -  for income transaction details:Account type: Income/Other income,Non posting: No
 
-explore: transaction_lines { fields: [ALL_FIELDS*, -transactions_spreedly.is_production_transaction, -transactions_spreedly.count_test_transactions, -transactions_spreedly.count_production_transactions]
+explore: transaction_lines { fields: [ALL_FIELDS*, -transactions_spreedly.is_production_transaction, -transactions_spreedly.count_test_transactions, -transactions_spreedly.count_production_transactions, -transactions_spreedly.is_test_transaction]
   view_name: transaction_lines
   sql_always_where:
    (${accounting_periods.fiscal_calendar_id} is null

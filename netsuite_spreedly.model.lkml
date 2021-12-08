@@ -16,6 +16,7 @@ include: "/views/*.view.lkml"
 include: "//spreedly/heroku_kafka/views/*.view"
 include: "customer_daily_income_transaction_details_summary.view"
 include: "//spreedly/heroku_kafka/config.lkml"
+#include: "//spreedly/heroku_kafka/views/payment_methods.view.lkml"
 
 # include: "//spreedly/heroku_kafka/heroku_kafka.model"
 
@@ -29,6 +30,13 @@ include: "//spreedly/heroku_kafka/config.lkml"
 #   max_cache_age: "24 hours"
 #   sql_trigger: select count(*) from "SNOWPIPE"."TRANSACTIONS" ;;
 # }
+
+datagroup: daily {
+  max_cache_age: "24 hours"
+  sql_trigger: SELECT CURRENT_DATE() ;;
+}
+
+explore: customer_360_transaction_lines {}
 
 explore: balance_sheet {
   extends: [balance_sheet_core]

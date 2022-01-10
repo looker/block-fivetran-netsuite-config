@@ -49,7 +49,7 @@
     hidden: no
     type: number
     sql:  case when ${monthly_org_partner_gateway_transactions.rev_share_type} = 'tsx' then ${monthly_org_partner_gateway_transactions.count}/nullif(${monthly_partner_gateway_transactions.count},0)
-    when ${monthly_org_partner_gateway_transactions.rev_share_type} = 'rev' then ${monthly_org_partner_gateway_transactions.topline_revenue}/nullif(${monthly_partner_gateway_transactions.topline_revenue},0)
+    when ${monthly_org_partner_gateway_transactions.rev_share_type} = 'rev' then ${monthly_org_partner_gateway_transactions.net_revenue}/nullif(${monthly_partner_gateway_transactions.net_revenue},0)
     else 0 end;;
     }
 

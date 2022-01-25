@@ -139,7 +139,56 @@ view: top_customers_by_subscription_and_usage {
   }
 }
 
-
+view: top_customers_last_year_by_subscription_and_usage {
+  derived_table: {
+    explore_source: transaction_lines {
+      column: name { field: customers.name }
+      column: customer_id { field: customers.customer_id }
+      column: sum_transaction_amount_ytd_through_eom_last_year {}
+      derived_column: customer_rank {
+        sql: row_number() over(order by sum_transaction_amount_ytd_through_eom_last_year desc) ;;
+      }
+      filters: {
+        field: transaction_lines.is_transaction_non_posting
+        value: "No"
+      }
+      filters: {
+        field: income_accounts.is_income_account
+        value: "Yes"
+      }
+      filters: {
+        field: budget_category.name
+        value: "Annual Budget,null"
+      }
+      filters: {
+        field: income_accounts.name
+        value: "ENT API Call Usage,Contract Subscription Revenue,ENT Other Usage,MtM Subscription Revenue,MtM API Call Usage,MtM Other Usage"
+      }
+      filters: {
+        field: accounting_periods.ending_month
+        value: "1 years"
+      }
+      limit: 25
+      sorts: [transaction_lines.sum_transaction_amount_ytd_through_eom_last_year: desc]
+    }
+  }
+  dimension: customer_id {
+    view_label: "Top Customers and Gateways"
+    hidden: yes
+    type: number
+    primary_key: yes
+  }
+  dimension: customer_rank_by_subscription_and_usage_last_year {
+    view_label: "Top Customers and Gateways"
+    type: number
+    sql: ${TABLE}.customer_rank ;;
+  }
+  dimension: is_top_25_customer_by_subscription_and_usage_last_year {
+    view_label: "Top Customers and Gateways"
+    type: yesno
+    sql: ${customer_id} is not null ;;
+  }
+}
 
 view: top_customers_by_all_revenue {
   derived_table: {
@@ -236,6 +285,53 @@ view: top_gateways {
     sql: ${TABLE}.customer_rank ;;
   }
   dimension: is_top_25_gateway {
+    view_label: "Top Customers and Gateways"
+    type: yesno
+    sql: ${customer_id} is not null ;;
+  }
+}
+
+view: top_gateways_last_year{
+  derived_table: {
+    explore_source: transaction_lines {
+      column: name { field: customers.name }
+      column: customer_id { field: customers.customer_id }
+      column: sum_transaction_amount_ytd_through_eom_last_year {}
+      derived_column: customer_rank {
+        sql: row_number() over(order by sum_transaction_amount_ytd_through_eom_last_year desc) ;;
+      }
+      filters: {
+        field: transaction_lines.is_transaction_non_posting
+        value: "No"
+      }
+      filters: {
+        field: income_accounts.is_income_account
+        value: "Yes"
+      }
+      filters: {
+        field: income_accounts.name
+        value: "SGP Revenue Share,SGP Annual Membership Fee,PGP Revenue Share"
+      }
+      filters: {
+        field: accounting_periods.ending_date
+        value: "1 years"
+      }
+      limit: 25
+      sorts: [transaction_lines.sum_transaction_amount_ytd_through_eom_last_year: desc]
+    }
+  }
+  dimension: customer_id {
+    hidden: yes
+    view_label: "Top Customers and Gateways"
+    type: number
+    primary_key: yes
+  }
+  dimension: gateway_rank_last_year {
+    view_label: "Top Customers and Gateways"
+    type: number
+    sql: ${TABLE}.customer_rank ;;
+  }
+  dimension: is_top_25_gateway_last_year {
     view_label: "Top Customers and Gateways"
     type: yesno
     sql: ${customer_id} is not null ;;

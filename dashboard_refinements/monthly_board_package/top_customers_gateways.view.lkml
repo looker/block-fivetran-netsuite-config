@@ -3,6 +3,7 @@ include: "/views/transaction_lines.view"
 # used for the Top Customers and Top Gateways of the monthly board package
 
 view: +transaction_lines {
+
   dimension: is_ytd_through_eom {
     view_label: "Top Customers and Gateways"
     type: yesno
@@ -13,9 +14,10 @@ view: +transaction_lines {
   dimension: is_ytd_through_eom_last_year {
     view_label: "Top Customers and Gateways"
     type: yesno
-    sql: EXTRACT(MONTH FROM ${accounting_periods.ending_raw}) < EXTRACT(MONTH from CURRENT_DATE())
-      AND EXTRACT(YEAR FROM ${accounting_periods.ending_raw})+1 = EXTRACT(YEAR from CURRENT_DATE());;
+    sql: EXTRACT(MONTH FROM ${accounting_periods.ending_raw}) < EXTRACT(MONTH from CURRENT_DATE()) AND
+    EXTRACT(YEAR FROM ${accounting_periods.ending_raw})+1 = EXTRACT(YEAR from CURRENT_DATE());;
   }
+# EXTRACT(MONTH FROM ${accounting_periods.ending_raw}) < EXTRACT(MONTH from CURRENT_DATE()) AND
 
   measure: sum_transaction_amount_ytd_through_eom {
     view_label: "Top Customers and Gateways"

@@ -284,6 +284,13 @@ explore: +transaction_lines {
     sql_on: ${transaction_lines.company_id} = ${top_gateways.customer_id} ;;
     relationship: many_to_one
   }
+
+  join: top_gateways_last_year{
+    type: left_outer
+    sql_on: ${transaction_lines.company_id} = ${top_gateways.customer_id} ;;
+    relationship: many_to_one
+  }
+
 }
 
 

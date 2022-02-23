@@ -6,8 +6,8 @@ include: "/customer_daily_income_transaction_details_summary.view"
 #include: "//spreedly/general/views/account.view"
 include: "/dashboard_refinements/**/*view"
 include: "//spreedly/data_and_analytics/views/snowpipe/transactions.view.lkml"
-include: "//spreedly/general/derived_tables/monthly_org_partner_gateway_transactions.view"
-include: "//spreedly/general/derived_tables/monthly_partner_gateway_transactions.view"
+include: "//spreedly/data_and_analytics/derived_tables/monthly_org_partner_gateway_transactions.view"
+include: "//spreedly/data_and_analytics/derived_tables/monthly_partner_gateway_transactions.view"
 
 # fields: [ALL_FIELDS*, -transactions_spreedly.is_production_transaction, -transactions_spreedly.count_test_transactions, -transactions_spreedly.count_production_transactions]
 # Suggested filters/ Alwasys filter default yes -  for income transaction details:Account type: Income/Other income,Non posting: No

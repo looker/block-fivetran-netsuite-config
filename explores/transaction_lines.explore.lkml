@@ -1,7 +1,6 @@
 include: "/*.view.lkml"
 include: "/views/*.view.lkml"
 
-include: "//spreedly/general/views/*.view"
 include: "/customer_daily_income_transaction_details_summary.view"
 #include: "//spreedly/general/views/account.view"
 include: "/dashboard_refinements/**/*view"

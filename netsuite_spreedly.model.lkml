@@ -38,16 +38,19 @@ datagroup: daily {
 explore: customer_360_transaction_lines {}
 
 explore: balance_sheet {
+  group_label: "Netsuite"
   extends: [balance_sheet_core]
 }
 
 explore: income_statement {
+  group_label: "Netsuite"
   extends: [income_statement_core]
 }
 
 explore: income_transaction_details {
   view_name: transaction_lines
   description: "Only income statement lines"
+  group_label: "Netsuite"
   extends: [transaction_lines]
   sql_always_where: ${transactions_with_converted_amounts.is_income_statement}
 
@@ -60,6 +63,7 @@ explore: income_transaction_details {
 
 # MFJ 1/15/20 added join to see indirect fields on indirect revenue to check
 explore: monthly_org_partner_gateway_transactions {
+  group_label: "Netsuite"
    join: monthly_partner_gateway_transactions{
     type: left_outer
       sql_on:${monthly_org_partner_gateway_transactions.netsuite_gateway_type}=${monthly_partner_gateway_transactions.netsuite_gateway_type}

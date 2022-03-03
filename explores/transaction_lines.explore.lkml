@@ -12,6 +12,7 @@ include: "//spreedly/data_and_analytics/derived_tables/monthly_partner_gateway_t
 # Suggested filters/ Alwasys filter default yes -  for income transaction details:Account type: Income/Other income,Non posting: No
 
 explore: transaction_lines { fields: [ALL_FIELDS*, -transactions_spreedly.is_production_transaction, -transactions_spreedly.count_test_transactions, -transactions_spreedly.count_production_transactions, -transactions_spreedly.is_test_transaction]
+  group_label: "Netsuite"
   view_name: transaction_lines
   sql_always_where:
    (${accounting_periods.fiscal_calendar_id} is null

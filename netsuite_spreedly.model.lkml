@@ -179,3 +179,15 @@ explore: monthly_org_partner_gateway_transactions {
 # explore: transaction_details {
 #   extends: [transaction_details_core]
 # }
+
+
+
+
+### Explores to exclude
+explore: +transactions_last_12_months {
+  hidden: yes
+}
+
+explore: +transactions {
+  hidden: yes
+}

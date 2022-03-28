@@ -1242,6 +1242,12 @@ view: customers {
     drill_fields: [detail*]
   }
 
+  # dimension: count_active_customers{
+  #   type: number
+  #   sql: case when ${transaction_lines.sum_transaction_amount}>0.0 then ${customer_id} end  ;;
+  # }
+
+
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [

@@ -981,6 +981,7 @@ view: transaction_lines {
   }
 
   measure: sum_transaction_amount {
+    description: "Calculate the amount of Revenue for a given item or customer in a given month"
     type: sum
     value_format_name: usd
     sql: ${transaction_amount} ;;
@@ -1002,6 +1003,9 @@ measure: first_transaction_date {
     type: date
     sql: min(${date_created_month}) ;;
   }
+
+
+
 
 # measure: total_revenue {
 #   type: number

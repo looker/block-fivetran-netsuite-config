@@ -8,6 +8,7 @@ view: active_customer_count {
         column: customer_id { field: customers.customer_id }
         column: sum_transaction_amount {}
         column: ending_month { field: accounting_periods.ending_month }
+        column: ending_date { field: accounting_periods.ending_date }
         filters: {
           field: income_accounts.is_income_account
           value: "Yes"
@@ -36,6 +37,10 @@ view: active_customer_count {
     dimension: ending_month {
       type: date_month
     }
+
+  dimension: ending_date {
+    type: date
+  }
 
   measure: active_customer_count {
     type: count_distinct

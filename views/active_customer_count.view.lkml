@@ -47,4 +47,37 @@ view: active_customer_count {
     sql: case when ${sum_transaction_amount} > 0 then ${customer_id} end ;;
   }
 
+  dimension: one_month_ago {
+    type: date_month
+    sql: add_months(${ending_date}, -1) ;;
+  }
+
+  dimension: two_months_ago {
+    type: date_month
+    sql: add_months(${ending_date}, -2) ;;
+  }
+
+  dimension: next_month {
+    type: date_month
+    sql: add_months(${ending_date}, 1) ;;
+  }
+
+  measure: revenue_previous_month {
+    type: number
+    sql: LAG (${sum_transaction_amount}, 1, NULL) OVER (ORDER BY ${ending_month}) ;;
+    value_format: "$#,##0.00"
+  }
+
+  measure: revenue_two_months_ago {
+    type: number
+    sql: LAG (${sum_transaction_amount}, 2, NULL) OVER (ORDER BY ${ending_month}) ;;
+    value_format: "$#,##0.00"
+  }
+
+  measure: revenue_next_month {
+    type: number
+    sql: LAG (${sum_transaction_amount}, -1, NULL) OVER (ORDER BY ${ending_month}) ;;
+    value_format: "$#,##0.00"
+  }
+
   }

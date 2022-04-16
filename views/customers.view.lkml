@@ -7,6 +7,7 @@ view: customers {
     primary_key: yes
     type: number
     sql: ${TABLE}."CUSTOMER_ID" ;;
+    value_format: "0"
   }
 
   dimension: _fivetran_deleted {

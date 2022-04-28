@@ -116,6 +116,19 @@ view: accounting_periods {
     sql: CAST(${TABLE}."ENDING" AS TIMESTAMP_NTZ) ;;
   }
 
+  dimension_group: current {
+    type: time
+    sql: current_timestamp;;
+  }
+
+  dimension_group: since_ending{
+    description: "This summarizes all dates to the first of the month"
+    type: duration
+    intervals: [month, quarter, year]
+    sql_start: ${ending_month::date} ;;
+    sql_end: ${current_month::date} ;;
+  }
+
   dimension: fiscal_calendar_id {
     type: number
     sql: ${TABLE}."FISCAL_CALENDAR_ID" ;;

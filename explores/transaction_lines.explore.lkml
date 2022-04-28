@@ -259,6 +259,13 @@ join: account_salesforce {
   relationship: many_to_one
 }
 
+  join: cbit_clearbit_c {
+    type: left_outer
+    sql_on: ${account_salesforce.cbit_clearbit_c} = ${cbit_clearbit_c.id} ;;
+    relationship: many_to_one
+  }
+
+
   join: user_salesforce{
     type: left_outer
     sql_on: ${account_salesforce.owner_id} = ${user_salesforce.id} ;;

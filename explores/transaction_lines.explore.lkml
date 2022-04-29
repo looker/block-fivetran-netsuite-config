@@ -81,6 +81,15 @@ explore: transaction_lines { fields: [ALL_FIELDS*, -transactions_spreedly.is_pro
     relationship: many_to_one #TODO AJC needs confirmation
   }
 
+  join: account_statuses {
+    type: left_outer
+    sql_on: ${customers.account_status_id} = ${account_statuses.list_id} ;;
+    relationship: one_to_one #TODO AJC needs confirmation
+  }
+
+
+
+
 #NDT use to calculate the number of customers with Revenue greater than zero
 join: active_customer_count {
   type: left_outer

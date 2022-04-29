@@ -80,4 +80,11 @@ view: active_customer_count {
     value_format: "$#,##0.00"
   }
 
+  measure: revenue_this_month {
+    type: number
+    sql: ${sum_transaction_amount} ;;
+    value_format: "$#,##0.00"
+  }
+
+
   }

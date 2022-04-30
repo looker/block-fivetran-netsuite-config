@@ -1033,6 +1033,20 @@ view: customers {
     sql: ${TABLE}."REV_REC_FORECAST_TEMPLATE" ;;
   }
 
+  dimension_group: revenue_churn_date {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: CAST(${TABLE}."REVENUE_CHURN_DATE" AS TIMESTAMP_NTZ) ;;
+  }
+
   dimension: revenue_estimate {
     type: number
     sql: ${TABLE}."REVENUE_ESTIMATE" ;;

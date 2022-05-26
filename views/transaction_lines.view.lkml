@@ -988,6 +988,18 @@ view: transaction_lines {
     drill_fields: [detail*]
   }
 
+#Ask Alonso
+  # measure: sum_transaction_amount_adj_Jan22 {
+  #   description: "Calculate the amount of Revenue for a given item or customer in a given month"
+  #   type: sum
+  #   value_format_name: usd
+  #   sql: Iff(month(${accounting_periods.ending_month})= 1,1, ${transaction_amount}) ;;
+  #   drill_fields: [detail*]
+  # }
+
+
+
+
   measure: Budget_Variance {
     type: number
     value_format_name: usd

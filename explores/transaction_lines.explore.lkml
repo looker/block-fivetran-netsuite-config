@@ -1,6 +1,6 @@
 include: "/*.view.lkml"
 include: "/views/*.view.lkml"
-
+include: "//spreedly/general/views/salesforce/opportunity.view"
 include: "/customer_daily_income_transaction_details_summary.view"
 #include: "//spreedly/general/views/account.view"
 include: "/dashboard_refinements/**/*view"
@@ -268,6 +268,13 @@ join: account_salesforce {
   relationship: many_to_one
 }
 
+  join :  opportunity {
+    type: left_outer
+    sql_on: ${opportunity.account_id}=${account_salesforce.id} ;;
+    relationship: one_to_many
+  }
+
+
   join: cbit_clearbit_c {
     type: left_outer
     sql_on: ${account_salesforce.cbit_clearbit_c} = ${cbit_clearbit_c.id} ;;
@@ -280,6 +287,8 @@ join: account_salesforce {
     sql_on: ${account_salesforce.owner_id} = ${user_salesforce.id} ;;
     relationship: many_to_one
   }
+
+
 
 
 # join: customer_activity {

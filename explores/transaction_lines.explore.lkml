@@ -82,6 +82,14 @@ explore: transaction_lines { fields: [ALL_FIELDS*, -transactions_spreedly.is_pro
     relationship: many_to_one #TODO AJC needs confirmation
   }
 
+  join: customer_parent_name {
+    from: customers
+    type: left_outer
+    sql_on: ${customers.top_level_parent_id} = ${customer_parent_name.customer_id} ;;
+    fields: [customer_parent_name.name]
+    relationship: many_to_one
+  }
+
   join: account_statuses {
     type: left_outer
     sql_on: ${customers.account_status_id} = ${account_statuses.list_id} ;;

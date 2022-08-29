@@ -1262,6 +1262,39 @@ view: customers {
   #   sql: case when ${transaction_lines.sum_transaction_amount}>0.0 then ${customer_id} end  ;;
   # }
 
+  dimension_group: Subscription_Customer_Revenue_Start {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: CAST(${TABLE}."SUBSCRIPTION_CUSTOMER_REVENU_0" AS TIMESTAMP_NTZ) ;;
+  }
+
+  dimension_group: Subscription_Customer_Revenue_Churn {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: CAST(${TABLE}."SUBSCRIPTION_CUSTOMER_REVENUE" AS TIMESTAMP_NTZ) ;;
+  }
+
+  dimension: Netsuite_Reactivation_Flag {
+    #type: yesno
+    type: string
+    sql: ${TABLE}."REACTIVATION_FLAG" ;;
+  }
 
   # ----- Sets of fields for drilling ------
   set: detail {

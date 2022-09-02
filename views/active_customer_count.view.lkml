@@ -47,6 +47,11 @@ view: active_customer_count {
     sql: case when ${sum_transaction_amount} > 0 then ${customer_id} end ;;
   }
 
+  measure: total_customer_count {
+    type: count_distinct
+    sql:${customer_id} ;;
+  }
+
   dimension: one_month_ago {
     type: date_month
     sql: add_months(${ending_date}, -1) ;;

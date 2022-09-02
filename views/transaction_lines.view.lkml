@@ -983,7 +983,7 @@ view: transaction_lines {
   measure: sum_transaction_amount {
     description: "Calculate the amount of Revenue for a given item or customer in a given month"
     type: sum
-    value_format_name: usd
+    value_format_name: usd_0
     sql: ${transaction_amount} ;;
     drill_fields: [detail*]
   }

@@ -9,6 +9,21 @@ view: active_customer_count {
         column: sum_transaction_amount {}
         column: ending_month { field: accounting_periods.ending_month }
         column: ending_date { field: accounting_periods.ending_date }
+        derived_column: revenue_one_month_ago {
+          sql: LAG (sum_transaction_amount, 1, NULL) OVER (PARTITION BY name ORDER BY ending_month) ;;
+        }
+        derived_column: revenue_two_months_ago {
+          sql: LAG (sum_transaction_amount, 2, NULL) OVER (PARTITION BY name ORDER BY ending_month) ;;
+        }
+        derived_column: revenue_three_months_ago {
+          sql: LAG (sum_transaction_amount, 3, NULL) OVER (PARTITION BY name ORDER BY ending_month) ;;
+        }
+        derived_column: revenue_next_month {
+          sql: LAG (sum_transaction_amount, -1, NULL) OVER (PARTITION BY name ORDER BY ending_month) ;;
+        }
+        derived_column: customer_row_number {
+          sql: ROW_NUMBER() OVER (PARTITION BY name ORDER BY ending_month) ;;
+        }
         filters: {
           field: income_accounts.is_income_account
           value: "Yes"
@@ -67,29 +82,58 @@ view: active_customer_count {
     sql: add_months(${ending_date}, 1) ;;
   }
 
-  measure: revenue_previous_month {
+  dimension: revenue_one_month_ago {
     type: number
-    sql: LAG (${sum_transaction_amount}, 1, NULL) OVER (ORDER BY ${ending_month}) ;;
     value_format: "$#,##0.00"
   }
 
-  measure: revenue_two_months_ago {
+  dimension: revenue_two_months_ago {
     type: number
-    sql: LAG (${sum_transaction_amount}, 2, NULL) OVER (ORDER BY ${ending_month}) ;;
     value_format: "$#,##0.00"
   }
 
-  measure: revenue_next_month {
+  dimension: revenue_three_months_ago {
     type: number
-    sql: LAG (${sum_transaction_amount}, -1, NULL) OVER (ORDER BY ${ending_month}) ;;
     value_format: "$#,##0.00"
   }
 
-  measure: revenue_this_month {
+  dimension: revenue_next_month {
     type: number
-    sql: ${sum_transaction_amount} ;;
     value_format: "$#,##0.00"
   }
+
+  dimension: customer_row_number {
+    type: number
+  }
+
+  measure: churned_this_month {
+    type: yesno
+    sql: ${revenue_two_months_ago} IS NOT NULL AND ${revenue_two_months_ago} > 0 AND ${revenue_one_month_ago} = 0 AND ${sum_transaction_amount} = 0;;
+  }
+
+  # measure: revenue_previous_month {
+  #   type: number
+  #   sql: LAG (${sum_transaction_amount}, 1, NULL) OVER (PARTITION BY ${name} ORDER BY ${ending_month}) ;;
+  #   value_format: "$#,##0.00"
+  # }
+
+  # measure: revenue_two_months_ago {
+  #   type: number
+  #   sql: LAG (${sum_transaction_amount}, 2, NULL) OVER (ORDER BY ${ending_month}) ;;
+  #   value_format: "$#,##0.00"
+  # }
+
+  # measure: revenue_next_month {
+  #   type: number
+  #   sql: LAG (${sum_transaction_amount}, -1, NULL) OVER (ORDER BY ${ending_month}) ;;
+  #   value_format: "$#,##0.00"
+  # }
+
+  # measure: revenue_this_month {
+  #   type: number
+  #   sql: ${sum_transaction_amount} ;;
+  #   value_format: "$#,##0.00"
+  # }
 
 
   }

@@ -1257,6 +1257,16 @@ view: customers {
     drill_fields: [detail*]
   }
 
+  measure: count_created_month {
+    type: count_distinct
+    sql: CASE WHEN ${create_month} = ${accounting_periods.ending_month} THEN ${customer_id} ELSE NULL END ;;
+  }
+
+  measure: count_churned_customers {
+    type: count_distinct
+    sql: CASE WHEN ${Subscription_Customer_Revenue_Churn_month} IS NOT NULL THEN ${name} ELSE NULL END ;;
+  }
+
   # dimension: count_active_customers{
   #   type: number
   #   sql: case when ${transaction_lines.sum_transaction_amount}>0.0 then ${customer_id} end  ;;

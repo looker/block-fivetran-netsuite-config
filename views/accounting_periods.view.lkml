@@ -222,4 +222,49 @@ view: accounting_periods {
     type: count
     drill_fields: [accounting_period_id, name, full_name, consolidated_exchange_rates.count, transactions.count]
   }
+
+  parameter: date_granularity {
+    type: unquoted
+    allowed_value: {
+      label: "Break down by Year"
+      value: "year"
+    }
+    allowed_value: {
+      label: "Break down by Quarter"
+      value: "quarter"
+    }
+    allowed_value: {
+      label: "Break down by Rolling 12 Complete Months"
+      value: "rolling"
+    }
+  }
+
+  dimension: date {
+    sql:
+    {% if date_granularity._parameter_value == 'year' %}
+    ${ending_year}
+    {% elsif date_granularity._parameter_value == 'quarter' %}
+    ${ending_quarter_of_year}
+    {% elsif date_granularity._parameter_value == 'rolling' %}
+    ${ending_month}
+    {% else %}
+    ${ending_date}
+    {% endif %};;
+  }
+
+  dimension: date_filter {
+    hidden: yes
+    sql:
+    {% if date_granularity._parameter_value == 'year' %}
+    'year_to_date'
+    {% elsif date_granularity._parameter_value == 'quarter' %}
+    'year_to_date'
+    {% elsif date_granularity._parameter_value == 'rolling' %}
+    '12_complete_months'
+    {% else %}
+    '12_complete_months'
+    {% endif %};;
+  }
+
+
 }

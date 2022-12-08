@@ -226,7 +226,7 @@ view: accounting_periods {
   parameter: date_granularity {
     type: unquoted
     allowed_value: {
-      label: "Break down by Year"
+      label: "Break down Year to Date"
       value: "year"
     }
     allowed_value: {

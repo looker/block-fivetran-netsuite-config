@@ -49,6 +49,16 @@ explore: transaction_lines { fields: [ALL_FIELDS*, -transactions_spreedly.is_pro
     relationship: many_to_one
   }
 
+  join: entity {
+    type: left_outer
+    sql_on: ${entity.entity_id} = ${transactions.entity_id} ;;
+    relationship: many_to_one
+  }
+  join: transaction_history {
+    type: left_outer
+    sql_on: ${transaction_history.transaction_id} = ${transaction_lines.transaction_id} ;;
+    relationship: one_to_many
+  }
   join: accounts {
     from: accounts_netsuite
     type: left_outer

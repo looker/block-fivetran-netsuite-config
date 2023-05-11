@@ -14,7 +14,7 @@ include: "*.view.lkml"
 include: "/views/*.view.lkml"
 
 include: "customer_daily_income_transaction_details_summary.view"
-include: "//spreedly/general/config.lkml"
+include: "//spreedly_legacy/general/config.lkml"
 #include: "//spreedly/heroku_kafka/views/payment_methods.view.lkml"
 
 # include: "//spreedly/heroku_kafka/heroku_kafka.model"

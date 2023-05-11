@@ -26,7 +26,7 @@ constant: SCHEMA_NAME {
 
 
 local_dependency: {
-  project: "spreedly"
+  project: "spreedly_legacy"
 }
 
 # remote_dependency:  {}

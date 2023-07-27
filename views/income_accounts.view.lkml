@@ -121,6 +121,34 @@ dimension: is_income_account {
     sql: ${TABLE}."PARENT_ID" ;;
   }
 
+  dimension_group: revenue_type {
+
+    sql: case
+           when ${account_number}=4011 then 'Platform Fees'
+           when ${account_number}=4012 then 'Usage Fees'
+           when ${account_number}=4021 then 'Platform Fees'
+           when ${account_number}=4022 then 'Usage Fees'
+           when ${account_number}=4032 then 'AU Fees'
+           when ${account_number}=4041 then 'Rev Share'
+           when ${account_number}=4034 then 'AU Fees'
+           when ${account_number}=4051 then 'PS Fees'
+           when ${account_number}=4013 then 'Usage Fees'
+           when ${account_number}=4042 then 'Rev Share'
+           when ${account_number}=4043 then 'Rev Share'
+           when ${account_number}=4060 then 'Other'
+           when ${account_number}=4015 then 'Platform Fees'
+           when ${account_number}=4017 then 'Platform Fees'
+           when ${account_number}=4024 then 'Platform Fees'
+           when ${account_number}=4025 then 'Usage Fees'
+           when ${account_number}=4023 then 'Usage Fees'
+           when ${account_number}=4016 then 'Platform Fees'
+           when ${account_number}=4052 then 'Platform Fees'
+        else 'Other'
+      end
+      ;;
+  }
+
+
   measure: count {
     type: count
     drill_fields: [income_account_id, legal_name, name, full_name, items.count]

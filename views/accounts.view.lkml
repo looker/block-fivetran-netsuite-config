@@ -344,7 +344,7 @@ view: accounts_netsuite {
     label: "Financial Line Category"
     description: "Financial line (Income, Cost of Sales, Headcount Expenses, Operating Expenses)"
     type: string
-    sql: CASE WHEN ${parent_account_name} in ('Contract Revenue', 'MtM Subscription Rev','Subscription Revenue') THEN 'Income'
+    sql: CASE WHEN ${parent_account_name} in ('Contract Revenue', 'MtM Subscription Rev','Subscription Revenue','Usage Revenue') THEN 'Income'
           WHEN ${parent_account_name} in ('Account Updater Revenue', 'Conference Income', 'Gateway Revenue Share', 'Professional Services - Income') THEN 'Income'
           WHEN ${type_name} = 'Cost of Goods Sold' OR ( ${type_name} in ('Expense', 'Other Expense') AND ${departments.parent_id} = 2) THEN 'Cost of Sales'
           WHEN ${opex_name_group} = 'Headcount Expense' THEN 'Headcount Expenses'
@@ -357,7 +357,7 @@ view: accounts_netsuite {
     label: "Financial Line Subcategory"
     description: "Financial line subcategory (Subscription Revenue, Other Income, Cost of Sales)"
     type: string
-    sql: CASE WHEN ${parent_account_name} in ('Contract Revenue', 'MtM Subscription Rev','Subscription Revenue') THEN 'Subscription Revenue'
+    sql: CASE WHEN ${parent_account_name} in ('Contract Revenue', 'MtM Subscription Rev','Subscription Revenue','Usage Revenue') THEN 'Subscription Revenue'
           WHEN ${parent_account_name} in ('Account Updater Revenue', 'Conference Income', 'Gateway Revenue Share', 'Professional Services - Income') THEN 'Other Income'
           WHEN ${type_name} = 'Cost of Goods Sold' OR ( ${type_name} in ('Expense', 'Other Expense') AND ${departments.parent_id} = 2) THEN 'Cost of Sales'
           END

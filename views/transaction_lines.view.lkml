@@ -988,6 +988,23 @@ view: transaction_lines {
     drill_fields: [detail*]
   }
 
+  measure: sum_transaction_amount_sub_and_usage {
+    description: "Sum of revenue where revenue type is 'Platform Fees' or 'Usage Fees' "
+    type: sum
+    value_format_name: usd_0
+    sql: ${transaction_amount} ;;
+    filters: [income_accounts.revenue_type: "Platform Fees,Usage Fees"]
+    drill_fields: [detail*]
+  }
+
+  measure: sum_transaction_amount_sub_usage_and_revshare {
+    description: "Sum of revenue where revenue type is 'Platform Fees','Usage Fees','Rev Share' or 'AV Fees' "
+    type: sum
+    value_format_name: usd_0
+    sql: ${transaction_amount} ;;
+    filters: [income_accounts.revenue_type: "Platform Fees,Usage Fees,Rev Share,AV Fees"]
+    drill_fields: [detail*]
+  }
 #Ask Alonso
   # measure: sum_transaction_amount_adj_Jan22 {
   #   description: "Calculate the amount of Revenue for a given item or customer in a given month"

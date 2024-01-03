@@ -988,6 +988,143 @@ view: transaction_lines {
     drill_fields: [detail*]
   }
 
+  measure: all_revenue{
+    group_label: "Spreedly Revenue"
+    description: "All Spreedly revenue for a given month (includes all income accounts except Bank Rewards, Other Income, Charitable Contributions - Non-Deductible)"
+    type: sum
+    value_format_name: usd
+    sql: ${transaction_amount} ;;
+    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" ,income_accounts.income_account_id: "NOT 401,NOT 557,NOT 578"]
+  }
+
+  measure: platform_revenue {
+    group_label: "Spreedly Revenue"
+    description: "Platform Revenue"
+    type: sum
+    value_format_name: usd
+    sql: ${transaction_amount} ;;
+    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" , income_accounts.revenue_type: "Platform Fees"]
+  }
+
+  measure: usage_revenue {
+    group_label: "Spreedly Revenue"
+    description: "Usage Revenue"
+    type: sum
+    value_format_name: usd
+    sql: ${transaction_amount} ;;
+    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" , income_accounts.revenue_type: "Usage Fees"]
+  }
+
+  measure: PS_revenue {
+    group_label: "Spreedly Revenue"
+    description: "Professional Services Revenue"
+    type: sum
+    value_format_name: usd
+    sql: ${transaction_amount} ;;
+    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" , income_accounts.revenue_type: "PS Fees"]
+  }
+
+  measure: AU_revenue {
+    group_label: "Spreedly Revenue"
+    description: "Account Updater Revenue"
+    type: sum
+    value_format_name: usd
+    sql: ${transaction_amount} ;;
+    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" , income_accounts.revenue_type: "AU Fees"]
+  }
+
+  measure: AV_revenue {
+    group_label: "Spreedly Revenue"
+    description: "Advanced Vault Revenue"
+    type: sum
+    value_format_name: usd
+    sql: ${transaction_amount} ;;
+    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" , income_accounts.revenue_type: "AV Fees"]
+  }
+
+  measure: rev_share_revenue {
+    group_label: "Spreedly Revenue"
+    description: "Revenue Share Revenue"
+    type: sum
+    value_format_name: usd
+    sql: ${transaction_amount} ;;
+    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" , income_accounts.revenue_type: "Rev Share"]
+  }
+
+  measure: other_revenue {
+    group_label: "Spreedly Revenue"
+    description: "Other Revenue"
+    type: sum
+    value_format_name: usd
+    sql: ${transaction_amount} ;;
+    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" , income_accounts.revenue_type: "Other", income_accounts.income_account_id: "NOT 401,NOT 557,NOT 578"]
+  }
+
+  measure: platform_and_usage_revenue {
+    group_label: "Spreedly Revenue"
+    description: "Platform and Usage Revenue"
+    type: sum
+    value_format_name: usd
+    sql: ${transaction_amount} ;;
+    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" , income_accounts.revenue_type: "Platform Fees,Usage Fees"]
+  }
+
+  measure: platform__usage_revshare_AV_revenue {
+    group_label: "Spreedly Revenue"
+    description: "Platform, Usage, Revshare, and Advanced Vault Revenue"
+    type: sum
+    value_format_name: usd
+    sql: ${transaction_amount} ;;
+    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" , income_accounts.revenue_type: "Platform Fees,Usage Fees,Rev Share,AV Fees"]
+  }
+
+  # measure: sum_transaction_amount_sub_and_usage {
+  #   description: "Sum of revenue where revenue type is 'Platform Fees' or 'Usage Fees' "
+  #   type: sum
+  #   value_format_name: usd_0
+  #   sql: ${transaction_amount} ;;
+  #   filters: [income_accounts.revenue_type: "Platform Fees,Usage Fees"]
+  #   drill_fields: [detail*]
+  # }
+
+  # measure: sum_transaction_amount_sub_usage_and_revshare {
+  #   description: "Sum of revenue where revenue type is 'Platform Fees','Usage Fees','Rev Share' or 'AV Fees' "
+  #   type: sum
+  #   value_format_name: usd_0
+  #   sql: ${transaction_amount} ;;
+  #   filters: [income_accounts.revenue_type: "Platform Fees,Usage Fees,Rev Share,AV Fees"]
+  #   drill_fields: [detail*]
+  # }
+
+  #Cohort Revenue
+
+  measure: all_revenue_cohort {
+    group_label: "Cohort Revenue"
+    description: ""
+    type: sum
+    value_format_name: usd
+    sql: ${transaction_amount} ;;
+    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" ,income_accounts.income_account_id: "NOT 401,NOT 557,NOT 578", customers.cohort: "Yes"]
+  }
+
+  measure: cohort_platform_and_usage_revenue {
+    group_label: "Cohort Revenue"
+    description: ""
+    type: sum
+    value_format_name: usd
+    sql: ${transaction_amount} ;;
+    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" , income_accounts.revenue_type: "Platform Fees,Usage Fees", customers.cohort: "Yes"]
+  }
+
+  measure: cohort_platform__usage_revshare_AV_revenue {
+    group_label: "Cohort Revenue"
+    description: ""
+    type: sum
+    value_format_name: usd
+    sql: ${transaction_amount} ;;
+    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" , income_accounts.revenue_type: "Platform Fees,Usage Fees,Rev Share,AV Fees", customers.cohort: "Yes"]
+  }
+
 #Ask Alonso
   # measure: sum_transaction_amount_adj_Jan22 {
   #   description: "Calculate the amount of Revenue for a given item or customer in a given month"

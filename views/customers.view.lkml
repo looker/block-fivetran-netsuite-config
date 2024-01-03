@@ -1306,6 +1306,13 @@ view: customers {
     sql: ${TABLE}."REACTIVATION_FLAG" ;;
   }
 
+  dimension: cohort {
+    type: yesno
+    sql: (DATEDIFF(month, ${Subscription_Customer_Revenue_Start_date}::DATE, accounting_periods.ending::DATE)>=12) OR
+         ${Subscription_Customer_Revenue_Start_date} IS NULL
+      ;;
+  }
+
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [

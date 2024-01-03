@@ -1017,6 +1017,17 @@ measure: first_transaction_date {
   }
 
 
+  measure: revenue_year {
+  type: sum
+  sql:
+  CASE
+  WHEN ((((CAST(accounting_periods."ENDING" AS TIMESTAMP_NTZ))) >= ((TO_TIMESTAMP('2022-01-01'))) AND ((CAST(accounting_periods."ENDING" AS TIMESTAMP_NTZ))) < ((DATEADD('year', 1, TO_TIMESTAMP('2022-01-01')))))) THEN '2022 Revenue'
+  WHEN ((((CAST(accounting_periods."ENDING" AS TIMESTAMP_NTZ))) >= ((TO_TIMESTAMP('2023-01-01'))) AND ((CAST(accounting_periods."ENDING" AS TIMESTAMP_NTZ))) < ((DATEADD('year', 1, TO_TIMESTAMP('2023-01-01')))))) THEN '2023 Revenue'
+  ELSE (CAST((TO_CHAR(DATE_TRUNC('month', CAST(accounting_periods."ENDING" AS TIMESTAMP_NTZ) ), 'YYYY-MM')) AS VARCHAR) || CAST('' AS VARCHAR))
+END;;
+}
+
+
 
 
 # measure: total_revenue {

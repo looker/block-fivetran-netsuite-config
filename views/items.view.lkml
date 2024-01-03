@@ -561,6 +561,11 @@ view: items {
     sql: ${TABLE}."NAME" ;;
   }
 
+  measure: name_measure {
+    type: string
+    sql: ${TABLE}."NAME" ;;
+  }
+
   dimension: nature_of_transaction_codes_id {
     type: number
     sql: ${TABLE}."NATURE_OF_TRANSACTION_CODES_ID" ;;

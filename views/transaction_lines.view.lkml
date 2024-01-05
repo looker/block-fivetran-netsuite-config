@@ -1134,6 +1134,37 @@ view: transaction_lines {
   #   drill_fields: [detail*]
   # }
 
+  #EBITDA Measures
+  measure: OPEX {
+    group_label: "Spreedly Expenses"
+    description: "All Spreedly operating expenses for a given month"
+    type: sum
+    value_format_name: usd
+    sql: ${transaction_amount}*(-1) ;;
+    filters: [is_transaction_non_posting: "No" , accounts.type_name: "Expense" ,accounts.category: "-Cost of Sales"]
+  }
+
+  measure: COGS {
+    group_label: "Spreedly Expenses"
+    description: "All Spreedly cost of goods sold for a given month"
+    type: sum
+    value_format_name: usd
+    sql: ${transaction_amount}*(-1) ;;
+    filters: [is_transaction_non_posting: "No", accounts.category: "Cost of Sales"]
+  }
+
+  measure: Gross_Margin {
+    type: number
+    value_format_name: usd
+    sql: ${all_revenue}+${COGS} ;;
+  }
+
+  measure: EBITDA {
+    type: number
+    value_format_name: usd
+    sql: ${Gross_Margin}+${OPEX} ;;
+  }
+
 
 
 

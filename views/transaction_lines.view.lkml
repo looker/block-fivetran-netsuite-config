@@ -1104,7 +1104,8 @@ view: transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_amount} ;;
-    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" ,income_accounts.income_account_id: "NOT 401,NOT 557,NOT 578", customers.cohort: "Yes"]
+    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" ,
+      income_accounts.income_account_id: "NOT 401,NOT 557,NOT 578", customers.cohort: "Yes"]
   }
 
   measure: cohort_platform_and_usage_revenue {
@@ -1113,7 +1114,8 @@ view: transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_amount} ;;
-    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" , income_accounts.revenue_type: "Platform Fees,Usage Fees", customers.cohort: "Yes"]
+    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" ,
+      income_accounts.revenue_type: "Platform Fees,Usage Fees", customers.cohort: "Yes"]
   }
 
   measure: cohort_platform__usage_revshare_AV_revenue {
@@ -1122,8 +1124,44 @@ view: transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_amount} ;;
-    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" , income_accounts.revenue_type: "Platform Fees,Usage Fees,Rev Share,AV Fees", customers.cohort: "Yes"]
+    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" ,
+      income_accounts.revenue_type: "Platform Fees,Usage Fees,Rev Share,AV Fees", customers.cohort: "Yes"]
   }
+
+  # Custom Filtered Measures for NRR
+
+  filter: revenue_type_filter {
+    type: string
+    suggest_dimension: income_accounts.revenue_type
+  }
+
+  dimension: satisfies_revenue_filter {
+    type: yesno
+    hidden: yes
+    sql: {% condition revenue_type_filter %} ${income_accounts.revenue_type} {% endcondition %} ;;
+  }
+
+  measure: all_revenue_dynamic {
+    group_label: "Spreedly Revenue"
+    description: ""
+    type: sum
+    value_format_name: usd
+    sql: ${transaction_amount} ;;
+    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" ,
+      income_accounts.income_account_id: "NOT 401,NOT 557,NOT 578", satisfies_revenue_filter: "yes"]
+  }
+
+  measure: cohort_revenue_dynamic {
+    group_label: "Cohort Revenue"
+    description: ""
+    type: sum
+    value_format_name: usd
+    sql: ${transaction_amount} ;;
+    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" ,
+      income_accounts.income_account_id: "NOT 401,NOT 557,NOT 578", customers.cohort: "Yes",
+      satisfies_revenue_filter: "yes"]
+  }
+
 
 #Ask Alonso
   # measure: sum_transaction_amount_adj_Jan22 {

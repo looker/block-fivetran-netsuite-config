@@ -994,7 +994,7 @@ view: transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_amount} ;;
-    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" ,income_accounts.income_account_id: "NOT 401,NOT 557,NOT 578"]
+    filters: [is_transaction_non_posting: "No" , accounts.type_name: "Income" ]
   }
 
   measure: platform_revenue {
@@ -1003,7 +1003,7 @@ view: transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_amount} ;;
-    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" , income_accounts.revenue_type: "Platform Fees"]
+    filters: [is_transaction_non_posting: "No" , accounts.type_name: "Income" , income_accounts.revenue_type: "Platform Fees"]
   }
 
   measure: usage_revenue {
@@ -1012,7 +1012,7 @@ view: transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_amount} ;;
-    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" , income_accounts.revenue_type: "Usage Fees"]
+    filters: [is_transaction_non_posting: "No" , accounts.type_name: "Income" , income_accounts.revenue_type: "Usage Fees"]
   }
 
   measure: PS_revenue {
@@ -1021,7 +1021,7 @@ view: transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_amount} ;;
-    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" , income_accounts.revenue_type: "PS Fees"]
+    filters: [is_transaction_non_posting: "No" , accounts.type_name: "Income" , income_accounts.revenue_type: "PS Fees"]
   }
 
   measure: AU_revenue {
@@ -1030,7 +1030,7 @@ view: transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_amount} ;;
-    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" , income_accounts.revenue_type: "AU Fees"]
+    filters: [is_transaction_non_posting: "No" , accounts.type_name: "Income" , income_accounts.revenue_type: "AU Fees"]
   }
 
   measure: AV_revenue {
@@ -1039,7 +1039,7 @@ view: transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_amount} ;;
-    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" , income_accounts.revenue_type: "AV Fees"]
+    filters: [is_transaction_non_posting: "No" , accounts.type_name: "Income", income_accounts.revenue_type: "AV Fees"]
   }
 
   measure: rev_share_revenue {
@@ -1048,7 +1048,7 @@ view: transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_amount} ;;
-    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" , income_accounts.revenue_type: "Rev Share"]
+    filters: [is_transaction_non_posting: "No" , accounts.type_name: "Income", income_accounts.revenue_type: "Rev Share"]
   }
 
   measure: other_revenue {
@@ -1057,7 +1057,7 @@ view: transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_amount} ;;
-    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" , income_accounts.revenue_type: "Other", income_accounts.income_account_id: "NOT 401,NOT 557,NOT 578"]
+    filters: [is_transaction_non_posting: "No" , accounts.type_name: "Income" , income_accounts.revenue_type: "Other", income_accounts.income_account_id: "NOT 401,NOT 557,NOT 578"]
   }
 
   measure: platform_and_usage_revenue {
@@ -1066,7 +1066,7 @@ view: transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_amount} ;;
-    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" , income_accounts.revenue_type: "Platform Fees,Usage Fees"]
+    filters: [is_transaction_non_posting: "No" , accounts.type_name: "Income" , income_accounts.revenue_type: "Platform Fees,Usage Fees"]
   }
 
   measure: platform__usage_revshare_AV_revenue {
@@ -1075,7 +1075,7 @@ view: transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_amount} ;;
-    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" , income_accounts.revenue_type: "Platform Fees,Usage Fees,Rev Share,AV Fees"]
+    filters: [is_transaction_non_posting: "No" , accounts.type_name: "Income" , income_accounts.revenue_type: "Platform Fees,Usage Fees,Rev Share,AV Fees"]
   }
 
   # measure: sum_transaction_amount_sub_and_usage {
@@ -1104,8 +1104,7 @@ view: transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_amount} ;;
-    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" ,
-      income_accounts.income_account_id: "NOT 401,NOT 557,NOT 578", customers.cohort: "Yes"]
+    filters: [is_transaction_non_posting: "No" , accounts.type_name: "Income", customers.cohort: "Yes"]
   }
 
   measure: cohort_platform_and_usage_revenue {
@@ -1114,8 +1113,7 @@ view: transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_amount} ;;
-    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" ,
-      income_accounts.revenue_type: "Platform Fees,Usage Fees", customers.cohort: "Yes"]
+    filters: [is_transaction_non_posting: "No" , accounts.type_name: "Income", customers.cohort: "Yes"]
   }
 
   measure: cohort_platform__usage_revshare_AV_revenue {
@@ -1124,8 +1122,7 @@ view: transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_amount} ;;
-    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" ,
-      income_accounts.revenue_type: "Platform Fees,Usage Fees,Rev Share,AV Fees", customers.cohort: "Yes"]
+    filters: [is_transaction_non_posting: "No" , accounts.type_name: "Income", customers.cohort: "Yes"]
   }
 
   # Custom Filtered Measures for NRR
@@ -1147,8 +1144,7 @@ view: transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_amount} ;;
-    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" ,
-      income_accounts.income_account_id: "NOT 401,NOT 557,NOT 578", satisfies_revenue_filter: "yes"]
+    filters: [is_transaction_non_posting: "No" , accounts.type_name: "Income", satisfies_revenue_filter: "yes"]
   }
 
   measure: cohort_revenue_dynamic {
@@ -1157,8 +1153,7 @@ view: transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_amount} ;;
-    filters: [is_transaction_non_posting: "No" , income_accounts.is_income_account: "Yes" ,
-      income_accounts.income_account_id: "NOT 401,NOT 557,NOT 578", customers.cohort: "Yes",
+    filters: [is_transaction_non_posting: "No" , accounts.type_name: "Income", customers.cohort: "Yes",
       satisfies_revenue_filter: "yes"]
   }
 

@@ -1113,7 +1113,7 @@ view: transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_amount} ;;
-    filters: [is_transaction_non_posting: "No" , accounts.type_name: "Income", customers.cohort: "Yes"]
+    filters: [is_transaction_non_posting: "No" , accounts.type_name: "Income", customers.cohort: "Yes", income_accounts.revenue_type: "Platform Fees,Usage Fees"]
   }
 
   measure: cohort_platform__usage_revshare_AV_revenue {
@@ -1122,7 +1122,7 @@ view: transaction_lines {
     type: sum
     value_format_name: usd
     sql: ${transaction_amount} ;;
-    filters: [is_transaction_non_posting: "No" , accounts.type_name: "Income", customers.cohort: "Yes"]
+    filters: [is_transaction_non_posting: "No" , accounts.type_name: "Income", customers.cohort: "Yes", income_accounts.revenue_type: "Platform Fees,Usage Fees,Rev Share,AV Fees"]
   }
 
   # Custom Filtered Measures for NRR

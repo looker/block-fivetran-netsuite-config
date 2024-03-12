@@ -19,7 +19,7 @@ view: customer_360_transaction_lines {
       }
       filters: {
         field: account_salesforce.account_stage_c
-        value: "Active Customer,Prior Customer,SQA,SAA,MQA"
+        value: "Active Customer,Prior Customer,SQA,SAA,MQA,MAA"
       }
       filters: {
         field: account_salesforce.is_deleted
